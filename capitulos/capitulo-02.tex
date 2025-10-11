@@ -428,7 +428,7 @@ A formatação dos vetores \gls{In} e \gls{Qn} é ilustrada na \autoref{fig:puls
 	\includegraphics[width=\linewidth]{assets/cap2/example_formatter_comp_rrc.pdf}
 \end{figure}
 
-Quanto maior o \gls{alpha}, mais suave é a transição entre os símbolos, mas também maior é a largura de banda ocupada \cite{10555531840}. A \autoref{fig:formatter_comp} apresenta a comparação entre os sinais \gls{dI} e \gls{dQ} quando é aplicada a modulação de pulso com pulso \gls{RRC} e \gls{Rect}, ou seja, quando o vetor de simbolos é apenas superamostrado. 
+Quanto maior o \gls{alpha}, mais suave é a transição entre os símbolos, mas também maior é a largura de banda ocupada. A \autoref{fig:formatter_comp} apresenta a comparação entre os sinais \gls{dI} e \gls{dQ} quando é aplicada a modulação de pulso com pulso \gls{RRC} e \gls{Rect}, ou seja, quando o vetor de simbolos é apenas superamostrado \cite{10555531840}.
 
 \begin{figure}[H]
 	\caption{Comparação entre modulação de pulso \gls{RRC} e \gls{Rect}}\label{fig:formatter_comp}
@@ -444,14 +444,14 @@ Nota-se que utilizando formatação \gls{Rect}, o sinal apresenta transições a
 
 \noindent onde, \gls{gt} é a resposta ao impulso da função, \gls{t} é o vetor de tempo e \gls{Tb} é o período de bit. Já com a modulação de pulso, o sinal é suavizado no dominio do tempo, reduzindo a interferência entre símbolos e ajustando a largura de banda do sinal conforme os parâmetros do modulador de pulso \cite{cnes_services_and_message_formats_ed2_rev2_2006,10555531840,rodrigues_demodulador_2018}.
 
-Dessa forma, podemos calcular a banda passante unilateral do sinal modulado \gls{W} para modulação de pulso \gls{RRC} como 
+Dessa forma, podemos calcular a banda consumida (unilateral) do sinal modulado \gls{W} para modulação de pulso \gls{RRC} como 
 
 \vspace{-1em}
 \begin{equation}
     W_{RRC} = \frac{1 + \alpha}{2 \cdot T_b} \text{ ,}
 \end{equation}
 
-\noindent onde \gls{alpha} é o fator de roll-off do pulso e \gls{Tb} é o período de bit. Já para modulação de pulso \gls{Rect}, a banda passante do sinal modulado é dada por
+\noindent onde \gls{alpha} é o fator de roll-off do pulso e \gls{Tb} é o período de bit. Já para modulação de pulso \gls{Rect}, a banda do sinal modulado é dada por
 
 \vspace{-1em}
 \begin{equation}
