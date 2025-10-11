@@ -253,9 +253,22 @@ A partir dela, é aplicado um "span", isto é, uma proteção para ignorar qualq
 
 \subsection{Segmentação do sinal recebido para recepção}\label{sec:segmentacao_recepcao}
 
-Para cada componente \gls{fcprime} decidida como portadora válida, tendo seu segmento de inicio e seu segmento de fim, o próximo passo é a segmentação do sinal recebido \gls{st} para recepção em segmentos de sinal \gls{stprime}. Cada segmento \gls{stprime} é então processado individualmente na cadeia de recepção com sua respectiva \gls{fcprime}, conforme detalhado na seção \ref{sec:recepcao}. O proceso de segmentação do sinal recebido para recepção é apresentado no código de exemplo \ref{cod:detector}.
+Para cada componente \gls{fcprime} decidida como portadora válida, tendo seu segmento de inicio e seu segmento de fim, o próximo passo é a segmentação do sinal recebido \gls{st} para recepção em segmentos de sinal \gls{stprime}. Cada segmento \gls{stprime} é então processado individualmente na cadeia de recepção com sua respectiva \gls{fcprime}, conforme detalhado na seção \ref{sec:recepcao}. O proceso de segmentação do sinal recebido para recepção é apresentado no código de exemplo \ref{alg:isolar_canal}.
 
-\lstinputlisting[language=python,caption={Recepção de sinal $s'(t)$},label=cod:detector]{codigo/detector.py}
+
+\begin{algorithm}[H]
+\caption{Isolamento do canal recebido $s'(t)$}
+\label{alg:isolar_canal}
+\begin{algorithmic}[1]
+\Require Canal contendo $s(t)$; detecções $(f_c, \textit{start\_seg}, \textit{end\_seg})$; parâmetros do detector $(f_s, \textit{seg}_s, \textit{history})$
+\Ensure Sinal isolado $s'(t)$
+\State Selecionar a primeira detecção $(f_c, \textit{start\_seg}, \textit{end\_seg}) \gets \textit{deteccoes}[0]$
+\State Calcular amostra inicial: $\textit{first\_sample} \gets (\textit{start\_seg} - \textit{history}) \times f_s \times \textit{seg}_s$
+\State Calcular amostra final: $\textit{last\_sample} \gets \textit{end\_seg} \times f_s \times \textit{seg}_s$
+\State Extrair o trecho do canal: $s'(t) \gets \textit{canal}[\textit{first\_sample}:\textit{last\_sample}]$
+\State \Return $s'(t)$
+\end{algorithmic}
+\end{algorithm}
 
 \section{CADEIA DE RECEPÇÃO}\label{sec:recepcao}    
 
@@ -268,7 +281,7 @@ O primeiro passo na cadeia de recepção é a demodulação do sinal recebido \g
 \begin{figure}[H]
 	\centering
 	\caption{Demodulação banda base dos canais $I$ e $Q$}\label{fig:receiver_demodulator}
-	\includegraphics[width=\linewidth]{assets/cap3/receiver_demodulator_freq.pdf}
+	\includegraphics[width=\linewidth]{assets/cap3/receiver_demodulator_time.pdf}
 \end{figure}
 
 \subsection{Filtragem}\label{sec:filtragem}
@@ -278,7 +291,7 @@ Após a demodulação, o próximo passo é a filtragem dos canais \gls{cI} e \gl
 \begin{figure}[H]
 	\centering
 	\caption{Filtragem passa baixa dos canais $I$ e $Q$}\label{fig:receiver_lpf}
-	\includegraphics[width=\linewidth]{assets/cap3/receiver_lpf_freq.pdf}
+	\includegraphics[width=\linewidth]{assets/cap3/receiver_lpf_time.pdf}
 \end{figure}
 
 Em seguida, os sinais \gls{dIprime} e \gls{dQprime} já filtrados são submetidos outra filtragem, com o objetivo de maximizar a \gls{SNR} do sinal, para isso é aplicada uma filtragem casada utilizando os mesmos filtros de pulso utilizados na modulação de pulso porem invertidos no tempo, ou seja, com resposta ao impulso \gls{gti}, conforme detalhado na seção \ref{sec:filtering}, resultando nos sinais \gls{Iprime} e \gls{Qprime}. O processo de filtragem casada é ilustrado na \autoref{fig:receiver_matchedfilter}.
@@ -286,7 +299,7 @@ Em seguida, os sinais \gls{dIprime} e \gls{dQprime} já filtrados são submetido
 \begin{figure}[H]
 	\centering
 	\caption{Filtragem casada dos canais $I$ e $Q$}\label{fig:receiver_matchedfilter}
-	\includegraphics[width=\linewidth]{assets/cap3/receiver_mf_freq.pdf}
+	\includegraphics[width=\linewidth]{assets/cap3/receiver_mf_time.pdf}
 \end{figure}
 
 Assim, os sinais \gls{Iprime} e \gls{Qprime} estão prontos para a sincronização de símbolos, conforme detalhado na seção \ref{sec:sincronizacao}.
@@ -309,7 +322,7 @@ Após a montagem do vetor de amostras esperadas para o sincronismo, que consiste
 	\includegraphics[width=\linewidth]{assets/cap3/example_synchronizer_word.pdf}
 \end{figure}
 
-Com o vetor de amostras esperadas para o sincronismo, é possível realizar a correlação, isto é, comparar o quanto se parece uma seção dos canais \gls{cI} e \gls{cQ} com o vetor de sincronismo, resultando no módulo de correlação, onde o pico máximo do módulo de correlação \gls{kmax} indica o ponto de início da transmissão. O processo de correlação para encontrar a amostra de máxima correlação é ilustrado nas \autoref{fig:receiver_corr} e \autoref{fig:receiver_sync}.
+Com o vetor de amostras esperadas para o sincronismo, é possível realizar a correlação, isto é, comparar o quanto se parece uma seção dos canais \gls{cI} e \gls{cQ} com o vetor de sincronismo, resultando no módulo de correlação $c[k]$, onde o pico máximo do módulo de correlação \gls{kmax} indica o ponto dos canais \gls{cI} e \gls{cQ} que mais se assemelha ao vetor de sincronismo. O processo de correlação para encontrar a amostra de máxima correlação é ilustrado nas \autoref{fig:receiver_corr} e \autoref{fig:receiver_sync}.
 
 \begin{figure}[H]
 	\centering
@@ -317,7 +330,7 @@ Com o vetor de amostras esperadas para o sincronismo, é possível realizar a co
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_sync_corr.pdf}
 \end{figure}
 
-Uma vez com o fator máximo de correlação, podemos facilmente determinar o delay inicial de amostragem como $\tau = f_s / k_{\text{max}}$, visto que a \gls{fs} é conhecida. Com o valor de \gls{tau} determinado, os canais \gls{cI} e \gls{cQ} estão prontos para serem amostrados a cada \gls{Tb} a partir do ponto inicial \gls{tau}. O processo de sincronização de símbolos é ilustrado na \autoref{fig:receiver_sync}.
+Uma vez com o fator máximo de correlação $k_{\text{max}}$, podemos determinar o delay inicial de amostragem, visto que a \gls{fs} é conhecida. A amostra  $\tau = f_s/k_{\text{max}}$ determina o ponto de máxima correlação entre o vetor de sincronismo para os canais \gls{cI} e \gls{cQ}, ou seja, a amostra exatamente no meio do comprimento do vetor de sincronismo $\Delta \tau$. O processo de sincronização de símbolos é ilustrado na \autoref{fig:receiver_sync}.
 
 \begin{figure}[H]
 	\centering
@@ -325,7 +338,14 @@ Uma vez com o fator máximo de correlação, podemos facilmente determinar o del
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_sync_time.pdf}
 \end{figure}
 
-Na \autoref{fig:receiver_sync} a região em cinza representa o período de preâmbulo, onde é possível observar que o pico máximo de correlação ocorre exatamente na metade do preâmbulo, ou seja, deve-se iniciar a amostragem a partir de $\tau + (\Delta \tau)/2$, onde $\Delta \tau$ é o comprimento do preâmbulo em amostras ($\Delta \tau = \text{\gls{Lsync}} \cdot f_s/R_b$). 
+Na \autoref{fig:receiver_sync} a região em cinza representa o período do vetor de sincronismo $\Delta \tau$, onde é possível observar que o pico máximo de correlação ocorre exatamente na metade do vetor de sincronismo $\tau$. O período de sincronismo $\Delta \tau$ é dado por 
+
+\begin{equation}
+	\Delta \tau = \frac{\text{\gls{Lsync}} \cdot f_s}{R_b} \text{ ,}
+\end{equation}
+
+\noindent Onde \gls{Lsync} é o comprimento do preâmbulo em bits, \gls{fs} é a frequência de amostragem e \gls{Rb} é a taxa de bits. Dessa forma, o delay inicial de amostragem (instânte ótimo para iniciar a amostragem) ocorrerá em $\tau + (\Delta \tau)/2$, ou seja, após finalizar o preâmbulo. 
+
 
 \subsection{Decisão de símbolos}\label{sec:decisao_simbolos}
 
@@ -365,6 +385,55 @@ Os vetores de bits \gls{Xnprime} e \gls{Ynprime} desembaralhados, são então de
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_conv_time.pdf}
 \end{figure}
 
-Finalmente, o vetor de bits \gls{utprime} é processado para extrair o datagrama, verificando a integridade dos dados através do campo de verificação \gls{CRC}, e então extraindo os campos de interesse, como o número de identificação da PCD \gls{pcdid} e o payload. O processo de recuperação do datagrama é apresentado no código de exemplo \ref{cod:reception}.
+Finalmente, o vetor de bits \gls{utprime} é processado para extrair o datagrama, verificando a integridade dos dados de cada seção, como checksum do \gls{pcdid} e bit de paridade do campo \gls{Tm}. Por fim, são então extraídos os campos de interesse, como o número de identificação da PCD (\gls{pcdid}) e o payload. O processo de recuperação do datagrama é apresentado no código de exemplo \ref{alg:montagem_datagrama}.
 
-\lstinputlisting[language=python,caption={Parse do datagrama de $s'(t)$},label=cod:reception]{codigo/receiver.py}
+% \lstinputlisting[language=python,caption={Parse do datagrama de $s'(t)$},label=cod:reception]{codigo/receiver.py}
+
+\begin{algorithm}[H]
+\caption{Montagem do datagrama a partir de $u'_t$}
+\label{alg:montagem_datagrama}
+\begin{algorithmic}[1]
+\Require Vetor de bits decodificados $u'_t$
+\Ensure Estrutura de datagrama recuperada $\textit{DatagramaRX}$
+\State Separar campo de tamanho da mensagem: $\textit{Tm} \gets u'_t[0:4]$
+\State Extrair campo de identificação da PCD: $\textit{pcdid} \gets u'_t[4:32]$
+\State Calcular e verificar \textit{checksum} do campo $\textit{pcdid}$
+\State Determinar número de blocos $N_b$ a partir de $\textit{Tm}$
+\For{$i \gets 0$ até $N_b-1$}
+    \If{$i = 0$}
+        \State Extrair bloco de 24 bits: $\textit{bloco}_i \gets u'_t[\text{offset}: \text{offset}+24]$
+        \State Agrupar três sensores: $\textit{sensor}_1$, $\textit{sensor}_2$, $\textit{sensor}_3$
+    \Else
+        \State Extrair bloco de 32 bits: $\textit{bloco}_i \gets u'_t[\text{offset}: \text{offset}+32]$
+        \State Agrupar quatro sensores: $\textit{sensor}_1$ a $\textit{sensor}_4$
+    \EndIf
+    \State Armazenar bloco no campo \textit{data}
+\EndFor
+\State Extrair bits finais de terminação (7 a 9 bits) $\textit{tail}$
+\State Montar estrutura final do datagrama $\textit{DatagramaRX}$ (incluindo \textit{Tm}, \textit{pcdid}, \textit{data}, \textit{tail})
+\State \Return $\textit{DatagramaRX}$
+\end{algorithmic}
+\end{algorithm}
+
+\section{IMPLEMENTAÇÃO DA BIBLIOTECA ARGOS-3}
+
+A implementação do transmissor e receptor ARGOS-3, conforme descrito nas seções \ref{sec:transmissor} e \ref{sec:receptor}, foi realizada em Python, utilizando bibliotecas open source como NumPy, SciPy e Matplotlib. O código-fonte completo do simulador está disponível no repositório GitHub \cite{githubrepository}, permitindo que outros alunos, professores e pesquisadores possam utilizar, modificar e contribuir para o desenvolvimento do projeto. A biblioteca ARGOS-3 utilizada na implementação pode ser instalada via `pip`, conforme mostrado no exemplo de instalação na \autoref{cod:install}. 
+
+\lstinputlisting[language=bash,caption={Exemplo de instalação da biblioteca},label=cod:install]{codigo/install.sh}
+
+O exemplo apresentado no \autoref{cod:argos3} demonstra o uso dos principais módulos da biblioteca, incluindo a criação de um transmissor, a transmissão de um datagrama, a detecção do canal e a recepção do datagrama.
+
+\lstinputlisting[language=python,caption={Exemplo de uso dos principais módulos da biblioteca},label=cod:argos3]{codigo/argos3.py}
+
+
+\subsection{BER vs Eb/N0}
+
+Com base na implementação do receptor e transmissor apresentada nas seções \ref{sec:receptor} e \ref{sec:transmissor}, foi realizado um estudo de desempenho do sistema, variando a relação \gls{EbN0} e medindo a \gls{BER} para cada valor, comparando o desempenho do sistema ARGOS-3 com modulação \gls{QPSK} (tanto teórica quanto simulada), conforme apresentado na \autoref{fig:ber_snr}.
+
+\begin{figure}[H]
+	\centering
+	\caption{Comparação BER vs SNR - ARGOS3 e QPSK}\label{fig:ber_snr}
+	\includegraphics[width=\linewidth]{assets/apendice/ber_vs_ebn0.pdf}
+\end{figure}
+
+Nota-se que o desempenho do sistema ARGOS-3 está melhor do que o desempenho teórico e simulado da modulação \gls{QPSK} pura, para um dado valor de \gls{BER} requerido para o sistema. Essa diferença pode ser explicada pela presença do código convolucional, que adiciona redundância e possibilidade de regressão de erros aos dados transmitidos, além da presença da técnica de codificação de linha \gls{Manchester}, que também contribui para a melhoria das características do sinal modulado.

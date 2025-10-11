@@ -411,7 +411,15 @@ Para aplicar a modulação de pulso e gerar os sinais analógicos \gls{dI} e \gl
     g(t) = \frac{(1-\alpha) \text{sinc}((1- \alpha) t / T_b) + \alpha(4/\pi) \cos(\pi(1 + \alpha)t/T_b) }{1 - (4\alpha )^2}
 \end{equation}
 
-\noindent onde \gls{alpha} é o fator de roll-off do pulso, que controla a largura de banda \gls{W} do sinal modulado. 
+\noindent onde \gls{alpha} é o fator de roll-off do pulso, que controla a largura de banda \gls{W} do sinal modulado, e \gls{sinc} é a função sinc, definida como
+
+\begin{equation}
+    \text{sinc}(x) = 
+    \begin{cases}
+        1, & \text{se } x = 0 \\
+        \dfrac{\sin(\pi x)}{\pi x}, & \text{se } x \neq 0
+    \end{cases} \text{ .}
+\end{equation}
 
 A formatação dos vetores \gls{In} e \gls{Qn} é ilustrada na \autoref{fig:pulse_modulate}, onde a resposta ao impulso \gls{gt} é apresentada em conjunto com os sinais \gls{dI} e \gls{dQ}. 
 
@@ -643,7 +651,7 @@ A \autoref{fig:matchedfilter} apresenta o espectro dos sinais \gls{Iprime} e \gl
 \begin{figure}[H]
 	\centering
 	\caption{Componentes $I$ e $Q$ após filtragem casada}\label{fig:matchedfilter}
-	\includegraphics[width=\linewidth]{assets/cap2/example_mf_time_comp.pdf}
+	\includegraphics[width=\linewidth]{assets/cap2/example_mf_freq_comp.pdf}
 \end{figure}
 
 
