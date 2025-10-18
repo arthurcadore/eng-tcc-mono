@@ -14,6 +14,7 @@ O primeiro passo na cadeia de transmissão é a geração da sequência de bits 
 	\centering
 	\caption{Streambits do datagrama ARGOS-3}\label{fig:datagrama_time}
 	\includegraphics[width=\linewidth]{assets/cap3/transmitter_datagram_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Após a montagem dos bits \gls{ut} do datagrama, os mesmos são codificados utilizando codificação convolucional, conforme detalhado na seção \ref{sec:conv_coding}, resultando nos vetores de bits \gls{vt0} e \gls{vt1}, que por sua vez são embaralhados resultando nas sequências \gls{Xn} e \gls{Yn} para os canais \gls{cI} e \gls{cQ}, respectivamente, o processo de codificação convolucional aplicado no vetor \gls{ut} é ilustrado na \autoref{fig:transmitter_conv_time}.
@@ -22,6 +23,7 @@ Após a montagem dos bits \gls{ut} do datagrama, os mesmos são codificados util
 	\centering
 	\caption{Codificação convolucional do datagrama ARGOS-3}\label{fig:transmitter_conv_time}
 	\includegraphics[width=\linewidth]{assets/cap3/transmitter_conv_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 As sequências \gls{Xn} e \gls{Yn} já embaralhadas, são então multiplexadas com o preâmbulo \gls{SIn} e \gls{SQn} dos canais \gls{cI} e \gls{cQ} respectivamente, gerados conforme apresentado na seção \ref{sec:preambulo}. A adição das sequências é fundamental para permitir a sincronização de símbolos no receptor, esse processo é ilustrado na \autoref{fig:mux_time}.
@@ -30,6 +32,7 @@ As sequências \gls{Xn} e \gls{Yn} já embaralhadas, são então multiplexadas c
 	\centering
 	\caption{Multiplexação com preâmbulo}\label{fig:mux_time}
 	\includegraphics[width=\linewidth]{assets/cap3/transmitter_mux_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Em seguida, os bits são codificados utilizando codificação de linha para melhorar as características espectrais do sinal modulado, como detalhado na seção \ref{sec:line_coding}, neste processo é utilizado apenas codificação \gls{NRZ} para os dois canais, pois a técnica \gls{Manchester} será aplicada posteriormente na modulação de pulso do canal \gls{cQ}, o processo de codificação de linha de ambos os canais é ilustrado na \autoref{fig:encoder_time}.
@@ -38,6 +41,7 @@ Em seguida, os bits são codificados utilizando codificação de linha para melh
 	\centering
 	\caption{Codificação de linha}\label{fig:encoder_time}
 	\includegraphics[width=\linewidth]{assets/cap3/transmitter_encoder_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 As sequências de símbolos \gls{In} e \gls{Qn} resultantes da codificação de linha, estão prontas para serem moduladas utilizando modulação de pulso. 
@@ -50,6 +54,7 @@ Após a montagem das sequências de símbolos \gls{In} e \gls{Qn}, o próximo pa
     \centering
     \caption{Diagrama de blocos do modulador de pulso para os canais $I$ e $Q$}\label{fig:pulse_modulate_diagram}
     \includegraphics[width=\linewidth]{assets/diagrams/pulse_modulate.pdf}
+    \fonteproprioautor
 \end{figure}
 
 \subsubsection{Pulso RRC e Manchester}
@@ -60,6 +65,7 @@ Antes de aplicar a modulação de pulso, é necessário gerar os filtros de puls
 	\centering
 	\caption{Resposta ao impulso - Pulso RRC}\label{fig:impulse_response_rrc}
 	\includegraphics[width=\linewidth]{assets/cap3/example_formatter_impulse.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Já o pulso \gls{Manchester} é gerado através de uma soma de dois pulsos \gls{RRC} deslocados no tempo, um positivo deslocado em $T_b/2$ e outro negativo deslocado em $-T_b/2$, conforme ilustrado na \autoref{fig:impulse_response_man}. O calculo do pulso pode ser expresso como 
@@ -80,6 +86,7 @@ W_{MAN} = 2 \cdot \frac{1 + \alpha}{T_b}
 	\centering
 	\caption{Resposta ao impulso - Pulso Manchester}\label{fig:impulse_response_man}
 	\includegraphics[width=\linewidth]{assets/cap3/example_formatter_impulse_man.pdf}
+    \fonteproprioautor
 \end{figure}
 
 A utilização do pulso \gls{Manchester} no canal \gls{cQ} ao invés da codificação de linha \gls{Manchester} proposta originalmente tem como objetivo simplificar a implementação do sistema, reduzindo a complexidade computacional e o número de etapas necessárias na cadeia de transmissão. 
@@ -94,6 +101,7 @@ O resultado são as sequências \gls{dI} e \gls{dQ} contínuas ao longo do tempo
 	\centering
 	\caption{Modulação de pulso dos canais $I$ e $Q$}\label{fig:transmitter_formatter_time}
 	\includegraphics[width=\linewidth]{assets/cap3/transmitter_formatter_time_comp.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Além da mudança nas caracteristicas do sinal no dominio do tempo, pode-se observar também a mudança no espectro do sinal, onde é possível observar a largura de banda \gls{W} do sinal, conforme ilustrado detalhado na seção \ref{sec:pulse_modulation}.  As sequências \gls{dI} e \gls{dQ} estão agora prontas para serem moduladas em banda passante utilizando modulação em fase em quadratura (\gls{QPSK}), conforme detalhado na seção \ref{sec:qpsk}. 
@@ -106,6 +114,7 @@ Na modulação \gls{QPSK}, os sinais modulados em banda base \gls{dI} e \gls{dQ}
 	\centering
 	\caption{Modulação em banda passante canais $I$ e $Q$}\label{fig:transmitter_modulator_time}
 	\includegraphics[width=\linewidth]{assets/cap3/transmitter_modulator_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 A partir do sinal modulado \gls{st}, é possível observar a constelação do sinal \gls{QPSK}, isto é o comportamento do sinal \gls{st} no \gls{iqplane}, que idealmente para o \gls{QPSK} é composto por quatro pontos distintos, cada um representando uma combinação única dos bits transmitidos pelos canais \gls{cI} e \gls{cQ}. A constelação do sinal modulado \gls{st} é ilustrada na \autoref{fig:transmitter_modulator_constellation}, onde é possível observar a fase do sinal modulado e a constelação resultante no \gls{iqplane}.
@@ -115,6 +124,7 @@ A partir do sinal modulado \gls{st}, é possível observar a constelação do si
 	\centering
 	\caption{Fase e Constelação do sinal modulado $s(t)$}\label{fig:transmitter_modulator_constellation}
 	\includegraphics[width=\linewidth]{assets/cap3/transmitter_modulator_constellation.pdf}
+    \fonteproprioautor
 \end{figure}
 
 
@@ -134,6 +144,7 @@ Com o sinal modulado em banda passante \gls{st} conforme definido acima, podemos
 	\centering
 	\caption{Comparação de portadora pura e sinal modulado}\label{fig:transmitter_modulator_portadora}
 	\includegraphics[width=\linewidth]{assets/cap3/transmitter_modulator_portadora.pdf}
+    \fonteproprioautor
 \end{figure}
 
 \section{CANAL E ADIÇÃO DE RUÍDO}\label{sec:canal}
@@ -145,6 +156,7 @@ Após a modulação do sinal \gls{st} em banda passante, o próximo passo é a t
 	\centering
 	\caption{Diagrama de blocos do canal}\label{fig:channel_diagram}
 	\includegraphics[width=\linewidth]{assets/diagrams/channel.pdf}
+    \fonteproprioautor
 \end{figure}
 
 \subsection{Modelo de canal}\label{sec:modelo_canal}
@@ -155,6 +167,7 @@ O modelo de canal é instânciado com base na \gls{fs} e na duração desejada p
 	\centering
 	\caption{Adição de múltiplas transmissões no canal}\label{fig:channel_time}
 	\includegraphics[width=\linewidth]{assets/cap3/example_channel_time_subchannels.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Em seguida, cada transmissão é adicionada ao canal junto a fator de posição desejado, fator que pode variar entre $0$ e $1$, onde $0$ representa o início do canal e $1$ representa o final do canal. A posição de cada transmissão é calculada com base no fator de posição e na quantidade total de amostras do canal. 
@@ -173,6 +186,7 @@ Uma vez com as transmissões adicionadas ao canal, o próximo passo é a geraç�
 	\centering
 	\caption{Adição de ruído ao canal}\label{fig:add_noise_time}
 	\includegraphics[width=\linewidth]{assets/cap3/example_channel_time_channel.pdf}
+    \fonteproprioautor
 \end{figure}
 
 \section{DETECÇÃO DE PORTADORA}\label{sec:detector}
@@ -183,6 +197,7 @@ Com as múltiplas transmissões e o ruído adicionados ao canal, o próximo pass
 	\centering
 	\caption{Diagrama de blocos da detecção de portadora}\label{fig:detector_diagram}
 	\includegraphics[width=\linewidth]{assets/diagrams/detector.pdf}
+    \fonteproprioautor
 \end{figure}
 
 \subsection{Segmentação do sinal recebido}\label{sec:segmentacao}
@@ -193,6 +208,7 @@ O primeiro passo na detecção de portadora é a segmentação do sinal recebido
 	\centering
 	\caption{Diagrama de waterfall do canal}\label{fig:waterfall}
 	\includegraphics[width=\linewidth]{assets/cap3/example_detector_waterfall.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Na \ref{fig:waterfall} é possível observar claramente a presença das transmissões realizadas, além disso, nota-se que no inicio de cada transmissão a uma sequência de altas componentes, formando uma linha, que corresponde ao período de portadora pura \gls{Pd}, conforme detalhado na seção \ref{sec:qpsk}.
@@ -205,6 +221,7 @@ Para cada segmento \gls{xn}, as componentes \gls{Pnk} são comparadas com o limi
 	\centering
 	\caption{Detecção de componentes no espectro com base em $P_t$}\label{fig:freq_detection}
 	\includegraphics[width=\linewidth]{assets/cap3/example_detector_freq.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Além disso, quando uma componente é detectada múltiplas vezes concecutivas, essa componente é considerada como "confirmada", ou seja, é uma componente que provavelmente corresponde a uma portadora válida, a quantidade de vezes consecutivas que uma componente deve ser detectada para ser considerada como confirmada é definida pelo parâmetro \gls{Nc}, esse processo pode ser expresso como
@@ -223,6 +240,7 @@ Além disso, quando uma componente é detectada múltiplas vezes concecutivas, e
 	\centering
 	\caption{Diagrama de waterfall de detecção do canal}\label{fig:waterfall_detection}
 	\includegraphics[width=\linewidth]{assets/cap3/example_detector_waterfall_detection.pdf}
+    \fonteproprioautor
 \end{figure}
 
 No simulador, \gls{Nc} é fixado em $4$, por ser metade do comprimento da portadora pura, entretanto, quanto maior o valor de \gls{Nc}, maior a certeza de que a componente detectada é realmente uma portadora válida portanto maior a tolerância da decisão a \gls{Pt} mais baixos, porém, isso também pode aumentar falhas de detecção, caso o período de amostragem do detector não seja suficiente para conformar a transmissão.
@@ -249,6 +267,7 @@ A partir dela, é aplicado um "span", isto é, uma proteção para ignorar qualq
 	\centering
 	\caption{Diagrama de waterfall de decisão do canal}\label{fig:waterfall_decision}
 	\includegraphics[width=\linewidth]{assets/cap3/example_detector_waterfall_decision.pdf}
+    \fonteproprioautor
 \end{figure}
 
 \subsection{Segmentação do sinal recebido para recepção}\label{sec:segmentacao_recepcao}
@@ -282,6 +301,7 @@ O primeiro passo na cadeia de recepção é a demodulação do sinal recebido \g
 	\centering
 	\caption{Demodulação banda base dos canais $I$ e $Q$}\label{fig:receiver_demodulator}
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_demodulator_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 \subsection{Filtragem}\label{sec:filtragem}
@@ -292,6 +312,7 @@ Após a demodulação, o próximo passo é a filtragem dos canais \gls{cI} e \gl
 	\centering
 	\caption{Filtragem passa baixa dos canais $I$ e $Q$}\label{fig:receiver_lpf}
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_lpf_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Em seguida, os sinais \gls{dIprime} e \gls{dQprime} já filtrados são submetidos outra filtragem, com o objetivo de maximizar a \gls{SNR} do sinal, para isso é aplicada uma filtragem casada utilizando os mesmos filtros de pulso utilizados na modulação de pulso porem invertidos no tempo, ou seja, com resposta ao impulso \gls{gti}, conforme detalhado na seção \ref{sec:filtering}, resultando nos sinais \gls{Iprime} e \gls{Qprime}. O processo de filtragem casada é ilustrado na \autoref{fig:receiver_matchedfilter}.
@@ -300,6 +321,7 @@ Em seguida, os sinais \gls{dIprime} e \gls{dQprime} já filtrados são submetido
 	\centering
 	\caption{Filtragem casada dos canais $I$ e $Q$}\label{fig:receiver_matchedfilter}
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_mf_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Assim, os sinais \gls{Iprime} e \gls{Qprime} estão prontos para a sincronização de símbolos, conforme detalhado na seção \ref{sec:sincronizacao}.
@@ -312,6 +334,7 @@ Para poder recuperar os bits transmitidos, é necessário realizar a sincroniza�
 	\centering
 	\caption{Diagrama de blocos para montagem do vetor de sincronismo}\label{fig:receiver_sync_diagram}
 	\includegraphics[width=\linewidth]{assets/diagrams/sync.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Após a montagem do vetor de amostras esperadas para o sincronismo, que consiste em, gerar a sequência, superamostra-la, aplicar formatação de pulso nos canais \gls{cI} e \gls{cQ}, e em seguida filtragem casada, obtem-se o vetor de amostras esperadas para o sincronismo de cada canal, conforme ilustrado na \autoref{fig:receiver_sync_word}.
@@ -320,6 +343,7 @@ Após a montagem do vetor de amostras esperadas para o sincronismo, que consiste
 	\centering
 	\caption{Vetor de amostras esperadas para sincronismo com $I$ e $Q$}\label{fig:receiver_sync_word}
 	\includegraphics[width=\linewidth]{assets/cap3/example_synchronizer_word.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Com o vetor de amostras esperadas para o sincronismo, é possível realizar a correlação, isto é, comparar o quanto se parece uma seção dos canais \gls{cI} e \gls{cQ} com o vetor de sincronismo, resultando no módulo de correlação $c[k]$, onde o pico máximo do módulo de correlação \gls{kmax} indica o ponto dos canais \gls{cI} e \gls{cQ} que mais se assemelha ao vetor de sincronismo. O processo de correlação para encontrar a amostra de máxima correlação é ilustrado nas \autoref{fig:receiver_corr} e \autoref{fig:receiver_sync}.
@@ -328,6 +352,7 @@ Com o vetor de amostras esperadas para o sincronismo, é possível realizar a co
 	\centering
 	\caption{Módulo de correlação entre $I$ e $Q$ e vetor de sincronismo}\label{fig:receiver_corr}
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_sync_corr.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Uma vez com o fator máximo de correlação $k_{\text{max}}$, podemos determinar o delay inicial de amostragem, visto que a \gls{fs} é conhecida. A amostra  $\tau = f_s/k_{\text{max}}$ determina o ponto de máxima correlação entre o vetor de sincronismo para os canais \gls{cI} e \gls{cQ}, ou seja, a amostra exatamente no meio do comprimento do vetor de sincronismo $\Delta \tau$. O processo de sincronização de símbolos é ilustrado na \autoref{fig:receiver_sync}.
@@ -336,6 +361,7 @@ Uma vez com o fator máximo de correlação $k_{\text{max}}$, podemos determinar
 	\centering
 	\caption{Sicronização de $I$ e $Q$ com vetor de sincronismo}\label{fig:receiver_sync}
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_sync_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Na \autoref{fig:receiver_sync} a região em cinza representa o período do vetor de sincronismo $\Delta \tau$, onde é possível observar que o pico máximo de correlação ocorre exatamente na metade do vetor de sincronismo $\tau$. O período de sincronismo $\Delta \tau$ é dado por 
@@ -355,6 +381,7 @@ Com o valor de \gls{tau} determinado, os canais \gls{cI} e \gls{cQ} estão pront
 	\centering
 	\caption{Amostragem dos canais $I$ e $Q$ em $T_b$ a partir de \gls{tau}}\label{fig:receiver_sampler}
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_sampler_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Tendo os sinais \gls{dIprime} e \gls{dQprime} e seus correspondentes vetores de amostras \gls{Inprime} e \gls{Qnprime}, é possível observar a constelação dos canais \gls{cI} e \gls{cQ} no \gls{iqplane}, antes e após a amostragem, conforme ilustrado na \autoref{fig:receiver_const}, nota-se que na direita da imagem, a constelação é plotada de maneira contínua, ou seja, cada ponto representa um instante de tempo \gls{t}, enquanto que na esquerda da imagem, a constelação é plotada apenas com os pontos amostrados, ou seja, cada ponto representa um símbolo sobre o tempo \gls{Tb}. 
@@ -363,6 +390,7 @@ Tendo os sinais \gls{dIprime} e \gls{dQprime} e seus correspondentes vetores de 
 	\centering
 	\caption{Constelação dos canais $I$ e $Q$ filtrados e amostrados}\label{fig:receiver_const}
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_sampler_const.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Os vetores de amostras \gls{Inprime} e \gls{Qnprime} estão agora prontos para a recuperação do datagrama, conforme detalhado na seção \ref{sec:decodificacao_convolucional}.
@@ -375,6 +403,7 @@ O último passo na cadeia de recepção é a recuperação do datagrama transmit
 	\centering
 	\caption{Desembaralhamento dos canais $I$ e $Q$}\label{fig:receiver_unscrambler}
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_descrambler_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Os vetores de bits \gls{Xnprime} e \gls{Ynprime} desembaralhados, são então decodificados utilizando o decodificador Viterbi, conforme detalhado na seção \ref{sec:conv_coding}, resultando no vetor de bits \gls{utprime}, que representa o datagrama recuperado. O processo de decodificação convolucional é ilustrado na \autoref{fig:receiver_conv}.
@@ -383,6 +412,7 @@ Os vetores de bits \gls{Xnprime} e \gls{Ynprime} desembaralhados, são então de
 	\centering
 	\caption{Decodificação convolucional dos canais $I$ e $Q$}\label{fig:receiver_conv}
 	\includegraphics[width=\linewidth]{assets/cap3/receiver_conv_time.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Finalmente, o vetor de bits \gls{utprime} é processado para extrair o datagrama, verificando a integridade dos dados de cada seção, como checksum do \gls{pcdid} e bit de paridade do campo \gls{Tm}. Por fim, são então extraídos os campos de interesse, como o número de identificação da PCD (\gls{pcdid}) e o payload. O processo de recuperação do datagrama é apresentado no código de exemplo \ref{alg:montagem_datagrama}.
@@ -434,6 +464,7 @@ Com base na implementação do receptor e transmissor apresentada nas seções \
 	\centering
 	\caption{Comparação BER vs SNR - ARGOS3 e QPSK}\label{fig:ber_snr}
 	\includegraphics[width=\linewidth]{assets/apendice/ber_vs_ebn0.pdf}
+    \fonteproprioautor
 \end{figure}
 
 Nota-se que o desempenho do sistema ARGOS-3 está melhor do que o desempenho teórico e simulado da modulação \gls{QPSK} pura, para um dado valor de \gls{BER} requerido para o sistema. Essa diferença pode ser explicada pela presença do código convolucional, que adiciona redundância e possibilidade de regressão de erros aos dados transmitidos, além da presença da técnica de codificação de linha \gls{Manchester}, que também contribui para a melhoria das características do sinal modulado.
