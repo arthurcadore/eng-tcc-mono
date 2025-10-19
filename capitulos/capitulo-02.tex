@@ -593,9 +593,9 @@ A \autoref{fig:iq_demodulation} ilustra o processo de demodulação dos canais \
 
 \subsection{Filtragem passa baixa}\label{sec:filtering}
 
-Para isolar os sinais em banda base \gls{dIprime} e \gls{dQprime}, é necessário aplicar um \gls{LPF}, para isso utiliza-se um filtro Butterworth (6ª Ordem) com frequência de corte de $720$ \gls{hz}, com resposta ao impulso \gls{ht}, que remove as componentes de alta frequência em $2 \cdot \text{\gls{fc}}$ resultantes da multiplicação de demodulação realizada anteriormente \cite{rodrigues_demodulador_2018}.
+Para isolar os sinais em banda base \gls{dIprime} e \gls{dQprime}, é necessário aplicar um \gls{LPF}, com frequência de corte de $720$ \gls{hz}, com resposta ao impulso \gls{ht}, que remove as componentes de alta frequência em $2 \cdot \text{\gls{fc}}$ resultantes da multiplicação de demodulação realizada anteriormente \cite{rodrigues_demodulador_2018}.
 
-O filtro Butterworth é escolhido por sua resposta em frequência plana e sem ondulações (ganhos ou atenuações) na banda passante, o que é ideal para preservar a integridade do sinal que está passando pelo filtro, neste caso como é um filtro passa baixa, o sinal que está em banda base. A aplicação do filtro \gls{LPF} aos sinais \gls{dXprime} e \gls{dYprime} pode ser expressa como
+Para o \gls{LPF}, o filtro Butterworth é escolhido por sua resposta em frequência plana e sem ondulações (ganhos ou atenuações) na banda passante, o que é ideal para preservar a integridade do sinal que está passando pelo filtro, neste caso como é um filtro passa baixa, o sinal que está em banda base. A aplicação do filtro \gls{LPF} aos sinais \gls{dXprime} e \gls{dYprime} pode ser expressa como
 
 \vspace{-1em}
 \begin{equation}
