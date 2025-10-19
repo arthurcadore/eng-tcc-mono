@@ -55,9 +55,9 @@ A comunicação por satélites desempenha um papel fundamental na coleta e disse
     \fonteproprioautor
 \end{figure}
 
-Esses satélites recebem sinais transmitidos pelas \gls{PCD} na faixa de frequência UHF (401,62 a 401,65 \gls{mhz}) e os retransmitem para as \gls{ETR} localizadas em solo, nas faixas de Banda-S (2267,5 \gls{mhz}). Como operam em órbitas baixas, esses satélites realizam aproximadamente 14 revoluções por dia sobre o território nacional, o que permite ampla cobertura espacial.
+Esses satélites recebem sinais transmitidos pelas \gls{PCD} na faixa de frequência UHF ($401{,}62$ a $401{,}65$ \gls{mhz}) e os retransmitem para as \gls{ETR} localizadas em solo, nas faixas de Banda-S ($2267{,}5$ \gls{mhz}). Como operam em órbitas baixas, esses satélites realizam aproximadamente 14 revoluções por dia sobre o território nacional, o que permite ampla cobertura espacial.
 
-Apesar da ampla cobertura, a comunicação com satélites de órbita baixa apresenta um grande desafio técnico, sendo a necessidade de visada simultânea entre a \gls{PCD} transmissora e o satélite, o que limita a janela de transmissão e impõe restrições na coleta contínua de dados. Além disso, o movimento relativo entre a \gls{PCD} e o satélite provoca o chamado efeito Doppler, responsável por deslocamentos na frequência do sinal recebido, podendo atingir até ±79,4 \gls{khz}. Esse desvio precisa ser compensado para garantir a correta demodulação do sinal \cite{rae2005detector, rodrigues_demodulador_2018}.
+Apesar da ampla cobertura, a comunicação com satélites de órbita baixa enfrenta o desafio técnico da necessidade de visada simultânea entre a \gls{PCD} e o satélite, condição que reduz a janela de transmissão e restringe a coleta contínua de dados. Além disso, o movimento relativo entre a \gls{PCD} e o satélite provoca o chamado efeito Doppler, responsável por deslocamentos na frequência do sinal recebido, podendo atingir até ±$79{,}4$ \gls{khz}. Esse desvio precisa ser compensado para garantir a correta demodulação do sinal \cite{rae2005detector, rodrigues_demodulador_2018}.
 
 A confiabilidade do enlace também é impactada por fatores como atenuação no espaço livre, ruídos térmicos, e variações atmosféricas. Para compensar esses fatores, são necessárias técnicas específicas de modulação, sincronização, codificação de dados e planejamento de enlace, de modo a garantir a confiabilidade das mensagens transmitidas.
 
@@ -148,11 +148,11 @@ A primeira etapa na montagem do datagrama consiste na coleta dos dados de aplica
 
 Cada sensor presente nas \gls{PCD} gera um valor de oito bits correspondente à variável monitorada, possibilitando assim 256 ($2^8$) níveis de monitoramento para cada sensor. A PCD pode ser equipada com diferentes sensores, de acordo com o cenário de instalação e os parâmetros ambientais de interesse. 
 
-Entre os sensores comumente utilizados, destacam-se os de direção do vento ($^{\circ}$), precipitação (mm), pressão atmosférica (mB), radiação solar acumulada (MJ/m2), temperatura do ar ($^{\circ}\text{C}$), umidade relativa ($\%$), e velocidade do vento (m/s). Por exemplo, os dados \footnote{http://sinda.crn.inpe.br/PCD/SITE/novo/site/historico/action.php} coletados da PCD 31855 são mostrados no \autoref{quadro:dados-meteorologicos}.
+Entre os sensores comumente utilizados, destacam-se os de direção do vento ($^{\circ}$), precipitação (mm), pressão atmosférica (mB), radiação solar acumulada (MJ/\ensuremath{\mathrm{m^2}}), temperatura do ar ($^{\circ}\text{C}$), umidade relativa ($\%$), e velocidade do vento (m/s). Por exemplo, os dados \footnote{http://sinda.crn.inpe.br/PCD/SITE/novo/site/historico/action.php} coletados da PCD 31855 são mostrados no \autoref{quadro:dados-meteorologicos}.
 
 
 \begin{quadro}[H]
-\caption{Dados meteorológicos da PCD 31855 (10/10/2007 - 11/10/2007)}\label{quadro:dados-meteorologicos}
+\caption{Dados meteorológicos da PCD 31855 (10/10/2007 -- 11/10/2007)}\label{quadro:dados-meteorologicos}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lccccccc}
     \toprule
@@ -179,7 +179,7 @@ Entre os sensores comumente utilizados, destacam-se os de direção do vento ($^
 
 \subsubsection{Blocos de dados}
 
-Os dados dos sensores são agrupados em conjuntos denominados `blocos de dados` contendo quatro sensores por bloco, conforme ilustrado na \autoref{fig:payload}. Assim, cada bloco de dados possui 32 bits ($4 \cdot 8$ bits), sendo o valor mínimo de um bloco de dados para montar um datagrama \gls{PTT-A3} (exceto o primeiro bloco que possui apenas 24 bits de comprimento). Para o caso específico em que a PCD irá transmitir apenas um bloco, ela poderá abrigar apenas três sensores. Caso haja mais de um bloco, o comprimento é dado por $24 + (\text{\gls{Nb} - 1}) \cdot 32$ bits \textcite{cnes_services_and_message_formats_ed2_rev2_2006}.
+Os dados dos sensores são agrupados em conjuntos denominados `blocos de dados' contendo quatro sensores por bloco, conforme ilustrado na \autoref{fig:payload}. Assim, cada bloco de dados possui 32 bits ($4 \cdot 8$ bits), sendo o valor mínimo de um bloco de dados para montar um datagrama \gls{PTT-A3} (exceto o primeiro bloco que possui apenas 24 bits de comprimento). Para o caso específico em que a PCD irá transmitir apenas um bloco, ela poderá abrigar apenas três sensores. Desta forma, o comprimento é dado por $24 + (\text{\gls{Nb}} - 1) \cdot 32$ bits \textcite{cnes_services_and_message_formats_ed2_rev2_2006}.
 
 \begin{figure}[H]
 	\centering
@@ -191,7 +191,7 @@ Os dados dos sensores são agrupados em conjuntos denominados `blocos de dados` 
 
 \subsection{Tamanho de mensagem}
 
-O campo de tamanho de mensagem \gls{Tm} é utilizado para informar ao receptor quantos blocos de dados estão sendo transmitidos no datagrama, este campo é formado pelo número de blocos em formato binário \gls{Bm} e pelo bit de pariedade \gls{Pm} para fechar uma seção de 4 bits. Como cada bloco possui 32 bits (exceto o primeiro), é possivel determinar o comprimento total dos dados de aplicação de \gls{Bm} = ($N_b - 1)_{2}$. O número de blocos \gls{Nb}, pode variar de um a oito, resultando no compriemnto esperado de bits no receptor para cada caso, conforme o \autoref{quadro:comprimento-mensagem}. 
+O campo de tamanho de mensagem \gls{Tm} é utilizado para informar ao receptor quantos blocos de dados estão sendo transmitidos no datagrama. Este campo é formado pelo número de blocos em formato binário \gls{Bm} e pelo bit de paridade \gls{Pm} para fechar uma seção de 4 bits. Como cada bloco possui 32 bits (exceto o primeiro), é possivel determinar o comprimento total dos dados de aplicação de \gls{Bm} = ($N_b - 1)_{2}$. O número de blocos \gls{Nb}, pode variar de um a oito, resultando no comprimento esperado de bits no receptor para cada caso, conforme o \autoref{quadro:comprimento-mensagem}. 
 
 \begin{quadro}[H]
     \caption{Comprimento em bits para cada tamanho de mensagem ($T_m$)}
@@ -203,7 +203,7 @@ O campo de tamanho de mensagem \gls{Tm} é utilizado para informar ao receptor q
                                   >{\centering\arraybackslash}X 
                                   >{\centering\arraybackslash}X}
         \toprule
-        \textbf{N° de Blocos} & \textbf{N° de Bits} & \textbf{$B_m$} & \textbf{$P_m$} & \textbf{$T_m$}\\
+        \textbf{N° de Blocos ($N_b$)} & \textbf{N° de Bits} & \textbf{$B_m$} & \textbf{$P_m$} & \textbf{$T_m$}\\
         \midrule
         1 & 24  & 000 & 0 & 0000\\
         2 & 56  & 001 & 1 & 0011\\
@@ -217,18 +217,18 @@ O campo de tamanho de mensagem \gls{Tm} é utilizado para informar ao receptor q
     \end{tabularx}
 \end{quadro}
 
-Conforme apresentado acima, para cada valor de \gls{Bm}, um valor de \gls{Pm} é calculado. O bit de paridade é calculado de forma a garantir que o número total de bits '1' na mensagem seja par, e é dado por
+Conforme apresentado acima, para cada valor de \gls{Bm}, um valor de \gls{Pm} é calculado. O bit de paridade é calculado de forma a garantir que o número total de bits \texttt{1} na mensagem seja par. Ao final, o campo de tamanho de mensagem \gls{Tm} é formado pela concatenação do valor de \gls{Bm} e \gls{Pm}, resultando em um campo de 4 bits \textcite{cnes_services_and_message_formats_ed2_rev2_2006}. 
 
-\vspace{-1em}
-\begin{equation}
-    P_m = 
-    \begin{cases}
-    1, & \text{se } \left[ \sum_{i=0}^{B_m} b_i = 0 \right]\mod 2  \\
-    0, & \text{se } \left[ \sum_{i=0}^{B_m} b_i = 1 \right]\mod 2 
-    \end{cases} \text{.}
-\end{equation}
+% \vspace{-1em}
+% \begin{equation}
+%     P_m = 
+%     \begin{cases}
+%     1, & \text{se } \left[ \sum_{i=0}^{B_m} b_i = 0 \right]\mod 2  \\
+%     0, & \text{se } \left[ \sum_{i=0}^{B_m} b_i = 1 \right]\mod 2 
+%     \end{cases} \text{.}
+% \end{equation}
 
-\noindent Ao final, o campo de tamanho de mensagem \gls{Tm} é formado pela concatenação do valor de \gls{Bm} e \gls{Pm}, resultando em um campo de 4 bits \textcite{cnes_services_and_message_formats_ed2_rev2_2006}. 
+% \noindent Ao final, o campo de tamanho de mensagem \gls{Tm} é formado pela concatenação do valor de \gls{Bm} e \gls{Pm}, resultando em um campo de 4 bits \textcite{cnes_services_and_message_formats_ed2_rev2_2006}. 
 
 
 \subsection{Identificador da PCD}
@@ -239,19 +239,15 @@ O \gls{pcdid} é formado por um número de 20 bits, \gls{ipcd}, seguido por oito
 
 \vspace{-1em}
 \begin{equation}
-R_{PCD} = \left( \sum_{i=0}^{19} I_{PCD} \cdot 2^i \right) \bmod 256 \text{ ,}
-\end{equation}
-\vspace{-0.2em}
-\begin{equation}
-    PCD_{ID} = I_{PCD} \oplus R_{PCD} \text{ .}
+R_{PCD} = \left( \sum_{i=0}^{19} I_{PCD}[i] \cdot 2^i \right) \bmod 256 \text{ ,}
 \end{equation}
 
-\noindent   É importante destacar que a proteção contra erros nesse campo é assegurada de forma indireta pelo uso da codificação convolucional aplicada à mensagem como um todo, além da redundância oferecida pelo número de repetições da mensagem ao longo da passagem do satélite. 
+\noindent   É importante destacar que a proteção contra erros do \gls{pcdid} é dada tanto de forma direta pelo checksum aplicado quanto de forma indireta pelo uso da codificação convolucional aplicada à mensagem como um todo. Além da redundância oferecida pelo número de repetições da mensagem ao longo da passagem do satélite. 
 
 
 \subsection{Bits de fim de mensagem}
 
-Ao final do datagrama, são inseridos entre sete e nove bits '0' com a finalidade de limpar o registrador do codificador convolucional, dando o encerramento da sequência codificada. A quantidade de bits de fim de mensagem adicionados depende do comprimento total da mensagem do usuário, conforme apresentado na \autoref{quadro:bits-codificacao}. Apesar de não carregar dados úteis a nível de aplicação, esses bits são fundamentais para o correto funcionamento do processo de decodificação \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
+Ao final do datagrama, são inseridos entre sete e nove bits \texttt{0} com a finalidade de limpar o registrador do codificador convolucional, dando o encerramento da sequência codificada. Conforme o padrão \gls{ARGOS-III}, a quantidade de bits de fim de mensagem adicionados depende do comprimento total da mensagem do usuário, conforme apresentado na \autoref{quadro:bits-codificacao}. Apesar de não carregar dados úteis a nível de aplicação, esses bits são fundamentais para o correto funcionamento do processo de decodificação \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
 
 \begin{quadro}[H]
     \caption{Comprimento da cauda (bits '0') para cada tamanho de mensagem}
@@ -262,7 +258,7 @@ Ao final do datagrama, são inseridos entre sete e nove bits '0' com a finalidad
                                   >{\centering\arraybackslash}X 
                                   >{\centering\arraybackslash}X}
         \toprule
-        \textbf{N° de Blocos} & \textbf{Bits Aplicação} & \textbf{Bits Datagrama} & \textbf{N° bits "0"} \\
+        \textbf{N° de Blocos ($N_b$)} & \textbf{Bits Aplicação} & \textbf{Bits Datagrama} & \textbf{N° bits \texttt{0}} \\
         \midrule
         1 &  24 &  56 & 7 \\
         2 &  56 &  88 & 8 \\
@@ -305,16 +301,16 @@ A taxa de codificação utilizada no padrão \gls{PTT-A3} é $R = \text{1/2}$, o
     \end{split}
 \end{equation}
 
-Os vetores geradores são utilizados para definir a estrutura do registrado do codificação convolucional aplicada à sequência de entrada \gls{ut}, resultando nas saídas \gls{vt0} e \gls{vt1}, que correspondem, respectivamente, aos canais \gls{cI} e \gls{cQ} utilizados posteriormente na modulação \gls{QPSK}. Essa operação pode ser representada por uma multiplicação vetorial entre uma janela deslizante de sete bits da entrada e a matriz formada pelos vetores geradores, conforme
+Os vetores geradores são utilizados para definir a estrutura do registrador do codificação convolucional aplicada à sequência de entrada \gls{ut}, resultando nas saídas \gls{vt0} e \gls{vt1}, que são utilizadas posteriormente no processo de embaralhamento. Essa operação pode ser representada por uma multiplicação vetorial entre uma janela deslizante de sete bits da entrada e a matriz formada pelos vetores geradores, conforme
 
 \begin{equation}
 \begin{aligned}
     \begin{bmatrix}
-        v_t^{(0)} & v_t^{(1)}
+        v[n]^{(0)} & v[n]^{(1)}
     \end{bmatrix}
     &=
     \begin{bmatrix}
-        u_{(t)} & u_{(t-1)} & u_{(t-2)} & u_{(t-3)} & u_{(t-4)} & u_{(t-5)} & u_{(t-6)}
+        u[n] & u[n-1] & u[n-2] & u[n-3] & u[n-4] & u[n-5] & u[n-6]
     \end{bmatrix} \cdot \\
     &\quad
     \begin{bmatrix}
@@ -338,9 +334,9 @@ Os vetores geradores são utilizados para definir a estrutura do registrado do c
 
 \subsection{Embaralhador}
 
-Após a codificação convolucional, os vetores de saída \gls{vt0} e \gls{vt1} são embaralhados para evitar padrões repetitivos, formando os vetores embaralhados \gls{Xn} e \gls{Yn}. O processo de embaralhamento é essencial para aumentar a robustez do sinal contra interferências e ruídos em rajada, pois os dados são espalhados ao longo da transmissão.
+Após a codificação convolucional, os vetores de saída \gls{vt0} e \gls{vt1} são embaralhados para evitar padrões repetitivos, formando os vetores embaralhados \gls{Xn} e \gls{Yn} de bits embaralhados. O embaralhador é utilizado para garantir que os dados sejam melhor distribuídos diminuindo a correlação entre os bits de forma a aumentar a aleatoriedade antes da modulação \gls{QPSK}, o que permite atingir uma melhor característica espectral do sinal transmitido \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
 
-O embaralhador é implementado utilizando um registrador de deslocamento de 3 bits para cada canal, conforme apresentado na \autoref{fig:embaralhador}, A cada novo bit de entrada, o registrador é deslocado, e o bit de saida calculado através de uma multiplexação entre as três saidas possiveis. Desta forma o index de embaralhamento de uma sequência de entrada é dado por
+O embaralhador é implementado utilizando um registrador de deslocamento de três bits para cada canal, conforme apresentado na \autoref{fig:embaralhador}. A cada novo bit de entrada, o registrador é deslocado, e o bit de saida calculado através de uma multiplexação entre as três saidas possiveis. Desta forma o índice de embaralhamento de uma sequência de entrada é dado por
 
 \vspace{-1em}
 \begin{equation}
@@ -355,7 +351,7 @@ O embaralhador é implementado utilizando um registrador de deslocamento de 3 bi
     \end{bmatrix}
 \end{equation}
 
-\noindent Onde \gls{Xn} e \gls{Yn} são os vetores de bits embaralhados. O embaralhador é utilizado para garantir que os dados sejam melhor distribuídos diminuindo a correlação entre os bits de forma a aumentar a aleatoriedade antes da modulação \gls{QPSK}, o que permite atingir uma melhor característica espectral. Esse processo pode ser representado pelo diagrama de blocos apresentado na \autoref{fig:embaralhador} \cite{cnes_services_and_message_formats_ed2_rev2_2006, rodrigues_demodulador_2018}.
+\noindent Esse processo pode ser representado pelo diagrama de blocos apresentado na \autoref{fig:embaralhador} \cite{cnes_services_and_message_formats_ed2_rev2_2006, rodrigues_demodulador_2018}.
 
 \begin{figure}[H]
 	\centering
@@ -366,10 +362,11 @@ O embaralhador é implementado utilizando um registrador de deslocamento de 3 bi
 
 \subsection{Codificação de Linha}\label{sec:line_coding}
 
-Em seguida, os vetores de bits embaralhados \gls{Xn} e \gls{Yn}, já multiplexados com os vetores de preâmbulo \gls{SIn} e \gls{SQn},precisam ser convertidos em vetores de simbolos, para isso é aplicada uma codificação de linha. O vetor \gls{Xn} é codificado utilizando a técnica \gls{NRZ}, enquanto o vetor \gls{Yn} é codificado utilizando a técnica \gls{Manchester} \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
+Em seguida, os vetores de bits embaralhados \gls{Xn} e \gls{Yn}, já multiplexados com os vetores de preâmbulo \gls{SIn} e \gls{SQn}, precisam ser convertidos em vetores de símbolos, para isso é aplicada uma codificação de linha. O vetor \gls{Xn} é codificado utilizando a técnica \gls{NRZ}, enquanto o vetor \gls{Yn} é codificado utilizando a técnica \gls{Manchester} \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
 
-A codificação \gls{NRZ} é realizada removendo a componente DC da sequência de entrada, ou seja, no vetor \gls{Xn} cada bit '1' é representado por '+1' e cada bit '0' é representado por '-1'. Esse processo pode ser descrito pela expressão
+A codificação \gls{NRZ} é realizada removendo a componente DC da sequência de entrada, ou seja, no vetor \gls{Xn} cada bit \texttt{1} é representado por $+1$ e cada bit \texttt{0} é representado por $-1$. Esse processo pode ser descrito pela expressão
 
+\vspace{-1em}
 \begin{equation}
 I[n] = 
 \begin{cases}
@@ -380,10 +377,10 @@ I[n] =
 
 \noindent resultando em um vetor de saída \gls{In}, neste caso com o dobro do comprimento do vetor de entrada (para manter o mesmo comprimento do vetor \gls{Qn}). 
 
-Para o vetor \gls{Yn}, é aplicada a codificação \gls{Manchester}, onde cada bit de entrada é representado por dois simbolos de saída, alternando entre '-1' e '+1'.  A codificação \gls{Manchester} é utilizada para garantir que haja transições de nível no sinal mesmo em sequências longas de bits iguais, essas transições refletem em mais trocas de simbolos na modulação \gls{QPSK}. Esse processo pode ser descrito pela expressão
+Para o vetor \gls{Yn}, é aplicada a codificação \gls{Manchester}, onde cada bit de entrada é representado por dois símbolos de saída, alternando entre '-1' e '+1'.  A codificação \gls{Manchester} é utilizada para garantir que haja transições de nível no sinal mesmo em sequências longas de bits iguais, essas transições refletem em mais trocas de símbolos na modulação \gls{QPSK}. Esse processo pode ser descrito pela expressão
 
 \begin{equation}
-Y[n] = 
+Q[n] = 
 \begin{cases}
 +1,-1, & \text{se } Y[n] = 1 \\
 -1,+1, & \text{se } Y[n] = 0 \text{ ,}
@@ -401,10 +398,10 @@ Y[n] =
 
 \subsection{Modulação de Pulso}\label{sec:pulse_modulation}
 
-Uma vez com os vetores de simbolo \gls{In} e \gls{Qn}, é aplicada a modulação de pulso, isto é, os vetores de simbolo são superamostrados, em função de \gls{fs} e filtrados para formar uma sequência contínua de símbolos ao longo de \gls{t}, onde cada bit de informação é transmitido durante um período de tempo $\text{ \gls{Tb}} = 1/ \text{\gls{Rb}}$ (tempo de bit), definido com base na taxa de bit \gls{Rb} \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
+Uma vez com os vetores de símbolo \gls{In} e \gls{Qn}, é aplicada a modulação de pulso, filtrados para formar uma sequência contínua de símbolos ao longo de \gls{t}, onde cada bit de informação é transmitido durante um período de tempo $\text{ \gls{Tb}} = 1/ \text{\gls{Rb}}$ (tempo de bit), definido com base na taxa de bit \gls{Rb} \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
 
 
-Para aplicar a modulação de pulso e gerar os sinais analógicos \gls{dI} e \gls{dQ}, os vetores de simbolo são multiplicados com um pulso com resposta ao impulso \gls{gt}. A formatação é dada por 
+Para aplicar a modulação de pulso e gerar os sinais analógicos \gls{dI} e \gls{dQ}, os vetores de símbolo são multiplicados com um pulso com resposta ao impulso \gls{gt}. A formatação é dada por 
 
 \vspace{-1em}
 \begin{equation}
@@ -417,13 +414,13 @@ Para aplicar a modulação de pulso e gerar os sinais analógicos \gls{dI} e \gl
 \noindent onde é utilizado um pulso \gls{gt} do tipo (\gls{RRC}), definido por
 
 \begin{equation}
-    g(t) = \frac{(1-\alpha) \text{sinc}((1- \alpha) t / T_b) + \alpha(4/\pi) \cos(\pi(1 + \alpha)t/T_b) }{1 - (4\alpha )^2}
+    g(t) = \frac{(1-\alpha) \sinc((1- \alpha) t / T_b) + \alpha(4/\pi) \cos(\pi(1 + \alpha)t/T_b) }{1 - (4\alpha t/T_b )^2}
 \end{equation}
 
 \noindent onde \gls{alpha} é o fator de roll-off do pulso, que controla a largura de banda \gls{W} do sinal modulado, e \gls{sinc} é a função sinc, definida como
 
 \begin{equation}
-    \text{sinc}(x) = 
+    \sinc(x) = 
     \begin{cases}
         1, & \text{se } x = 0 \\
         \dfrac{\sin(\pi x)}{\pi x}, & \text{se } x \neq 0
@@ -438,7 +435,7 @@ A formatação dos vetores \gls{In} e \gls{Qn} é ilustrada na \autoref{fig:puls
     \fonteproprioautor
 \end{figure}
 
-Quanto maior o \gls{alpha}, mais suave é a transição entre os símbolos, mas também maior é a largura de banda ocupada. A \autoref{fig:formatter_comp} apresenta a comparação entre os sinais \gls{dI} e \gls{dQ} quando é aplicada a modulação de pulso com pulso \gls{RRC} e \gls{Rect}, ou seja, quando o vetor de simbolos é apenas superamostrado \cite{10555531840}.
+Quanto maior o \gls{alpha}, mais suave é a transição entre os símbolos, mas também maior é a largura de banda ocupada. A \autoref{fig:formatter_comp} apresenta a comparação entre os sinais \gls{dI} e \gls{dQ} quando é aplicada a modulação de pulso com pulso \gls{RRC} e \gls{Rect} \cite{10555531840}.
 
 \begin{figure}[H]
 	\caption{Comparação entre modulação de pulso \gls{RRC} e \gls{Rect}}\label{fig:formatter_comp}
@@ -453,7 +450,7 @@ Nota-se que utilizando formatação \gls{Rect}, o sinal apresenta transições a
     g(t) = \text{rect}\left(\frac{t}{T_b}\right)
 \end{equation}
 
-\noindent onde, \gls{gt} é a resposta ao impulso da função, \gls{t} é o vetor de tempo e \gls{Tb} é o período de bit. Já com a modulação de pulso, o sinal é suavizado no dominio do tempo, reduzindo a interferência entre símbolos e ajustando a largura de banda do sinal conforme os parâmetros do modulador de pulso \cite{cnes_services_and_message_formats_ed2_rev2_2006,10555531840,rodrigues_demodulador_2018}.
+\noindent onde, \gls{gt} é a resposta ao impulso da função, \gls{t} é o tempo e \gls{Tb} é o período de bit. Já com o pulso \gls{RRC}, o sinal é suavizado no dominio do tempo, reduzindo a interferência entre símbolos e ajustando a largura de banda do sinal conforme os parâmetros do modulador de pulso \cite{cnes_services_and_message_formats_ed2_rev2_2006,10555531840,rodrigues_demodulador_2018}.
 
 Dessa forma, podemos calcular a banda consumida (unilateral) do sinal modulado \gls{W} para modulação de pulso \gls{RRC} como 
 
@@ -462,7 +459,7 @@ Dessa forma, podemos calcular a banda consumida (unilateral) do sinal modulado \
     W_{RRC} = \frac{1 + \alpha}{2 \cdot T_b} \text{ ,}
 \end{equation}
 
-\noindent onde \gls{alpha} é o fator de roll-off do pulso e \gls{Tb} é o período de bit. Já para modulação de pulso \gls{Rect}, a banda do sinal modulado é dada por
+\noindent onde \gls{alpha} é o fator de roll-off do pulso e \gls{Tb} é o período de bit. Já para modulação de pulso \gls{Rect}, a banda de primeiro lóbulo do sinal modulado é dada por
 
 \vspace{-1em}
 \begin{equation}
@@ -495,7 +492,7 @@ No processo de modulação QPSK, o sinal em fase \gls{dI} é multiplicado por um
     s(t) = A d_I'(t) \cos(2\pi f_c t + \phi_0) - Ad_Q'(t) \sin(2\pi f_c t + \phi_0) \text{ ,}
 \end{equation}
 
-\noindent onde \gls{A} é a amplitude do sinal modulado, \gls{fc} é a frequência da portadora, em torno de $401,625$ \gls{mhz} e \gls{phi0} é o desvio de fase inicial do sinal, que é considerado como zero ($\phi_0 = 0$). A \autoref{fig:iq_modulation} ilustra o processo de modulação IQ, mostrando os sinais \gls{dI} e \gls{dQ} e a constelação resultante, onde cada ponto representa um símbolo modulado.
+\noindent onde \gls{A} é a amplitude do sinal modulado, \gls{fc} é a frequência da portadora, em torno de $401{,}625$ \gls{mhz} e \gls{phi0} é o desvio de fase inicial do sinal, que é considerado como zero ($\phi_0 = 0$). A \autoref{fig:iq_modulation} ilustra o processo de modulação IQ, mostrando os sinais \gls{dI} e \gls{dQ} e a constelação resultante, onde cada ponto representa uma amostra no tempo \gls{t} dos canais $I$ e $Q$.
 
 \begin{figure}[H]
 	\centering
@@ -504,11 +501,11 @@ No processo de modulação QPSK, o sinal em fase \gls{dI} é multiplicado por um
     \fonteproprioautor
 \end{figure}
 
-A constelação \gls{QPSK} na \autoref{fig:iq_modulation} mapea cada par de amostra dos vetores \gls{dI} e \gls{dQ} no plano complexo ($I + jQ$). Após a transmissão, o sinal \gls{st} é somado a um vetor de ruído \gls{rt} para simular as condições reais no momento da recepção.
+A constelação \gls{QPSK} na \autoref{fig:iq_modulation} mapeia cada par de amostra dos vetores \gls{dI} e \gls{dQ} no plano complexo ($I + jQ$).
 
 \section{RECEPTOR PTT-A3}\label{sec:receptor}
 
-Como a transmissão dos dados das \gls{PCD} não segue uma estrutura de canais discretos, ou seja, cada \gls{PCD} seleciona uma frequência \gls{fn} dentro da faixa de $401,62$ a $401,65$ \gls{mhz} e realiza a transmissão. Dessa forma, o receptor no satélite necessita de um mecanismo de detecção de portadora para avaliar as candidatas de \gls{fc}, podendo assim demodular o sinal.
+Como a transmissão dos dados das \gls{PCD} não segue uma estrutura de canais discretos, ou seja, cada \gls{PCD} seleciona uma frequência \gls{fn} dentro da faixa de $401{,}62$ a $401{,}65$ \gls{mhz} e realiza a transmissão. Dessa forma, o receptor no satélite necessita de um mecanismo de detecção de portadora para avaliar as candidatas de \gls{fc}, podendo assim demodular o sinal.
 
 \begin{figure}[H]
 	\centering
@@ -674,7 +671,7 @@ A \autoref{fig:matchedfilter} apresenta o espectro dos sinais \gls{Iprime} e \gl
 \end{figure}
 
 
-\subsection{Decisão de simbolos}
+\subsection{Decisão de símbolos}
 
 Uma vez com os sinais \gls{dXprime} e \gls{dYprime} filtrados, considerando sincronismo perfeito, o próximo passo é a decisão dos sinais em instantes de \gls{Tb} (instante ótimo de decisão) a partir de um delay inicial \gls{tau}, para recuperar os símbolos transmitidos. O processo de decisão pode ser expresso como
 
@@ -708,7 +705,7 @@ Os valores amostrados \gls{Inprime} e \gls{Qnprime} são então decididos, isto 
     \end{cases} \text{ ,}
 \end{equation}
 
-\noindent onde \gls{Inprime} e \gls{Qnprime} são os vetores simbolo. A \autoref{fig:comparacao_bits} apresenta os simbolos decididos nos vetores \gls{Inprime} e \gls{Qnprime} após o processo de quantização, em comparação com os vetores originais \gls{In} e \gls{Qn} transmitidos.
+\noindent onde \gls{Inprime} e \gls{Qnprime} são os vetores símbolo. A \autoref{fig:comparacao_bits} apresenta os símbolos decididos nos vetores \gls{Inprime} e \gls{Qnprime} após o processo de quantização, em comparação com os vetores originais \gls{In} e \gls{Qn} transmitidos.
 
 \begin{figure}[H]
 	\centering
@@ -719,7 +716,7 @@ Os valores amostrados \gls{Inprime} e \gls{Qnprime} são então decididos, isto 
 
 \subsection{Decodificador de linha}
 
-Após a decisão dos símbolos, os vetores \gls{Inprime} e \gls{Qnprime} precisam ser convertidos de volta para a representação original dos bits. Para isso, são aplicadas as técnicas de decodificação de linha inversas às utilizadas na transmissão: \gls{NRZ} para o canal \gls{cI} e \gls{Manchester} para o canal \gls{cQ}. A decodificação \gls{NRZ} é realizada mapeando os valores '+1' para o bit '1' e '-1' para o bit '0', conforme
+Após a decisão dos símbolos, os vetores \gls{Inprime} e \gls{Qnprime} precisam ser convertidos de volta para a representação original dos bits. Para isso, são aplicadas as técnicas de decodificação de linha inversas às utilizadas na transmissão: \gls{NRZ} para o canal \gls{cI} e \gls{Manchester} para o canal \gls{cQ}. A decodificação \gls{NRZ} é realizada mapeando os valores $+1$ para o bit \texttt{1} e $-1$ para o bit \texttt{0}, conforme
 
 \begin{equation}
     X'[n] = 
@@ -730,7 +727,7 @@ Após a decisão dos símbolos, os vetores \gls{Inprime} e \gls{Qnprime} precisa
 \end{equation}
 
 
-\noindent resultando no vetor de bits \gls{Xnprime} correspondente ao canal \gls{cI}. O mesmo processo é aplicado ao canal \gls{cQ}, onde a decodificação \gls{Manchester} mapeia os pares de valores '+1,-1' para o bit '1' e '-1,+1' para o bit '0', conforme
+\noindent resultando no vetor de bits \gls{Xnprime} correspondente ao canal \gls{cI}. O mesmo processo é aplicado ao canal \gls{cQ}, onde a decodificação \gls{Manchester} mapeia os pares de valores $+1,-1$ para o bit \texttt{1} e $-1,+1$ para o bit \texttt{0}, conforme
 
 \begin{equation}
     Y'[n] = 

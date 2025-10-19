@@ -4,7 +4,7 @@ Este capítulo apresenta a implementação do sistema de comunicação digital p
 
 \section{CADEIA DE TRANSMISSÃO}\label{sec:transmissao}
 
-A primeira etapa do sistema é a geração da sequência de bits que compõem o datagrama ARGOS-3, conforme descrito na Seção \ref{sec:datagrama}. Essa sequência é multiplexada com um preâmbulo para permitir a sincronização de símbolos no receptor. Em seguida, os bits são codificados utilizando codificação de linha para melhorar as características espectrais do sinal modulado, como detalhado na Seção \ref{sec:line_coding}.
+A primeira etapa do sistema é a geração da sequência de bits que compõem o datagrama \gls{ARGOS-III}, conforme descrito na Seção \ref{sec:datagrama}. Essa sequência é multiplexada com um preâmbulo para permitir a sincronização de símbolos no receptor. Em seguida, os bits são codificados utilizando codificação de linha para melhorar as características espectrais do sinal modulado, como detalhado na Seção \ref{sec:line_coding}.
 
 \subsection{Sequência de transmissão}\label{sec:geracao_bits}
 
@@ -447,7 +447,7 @@ Finalmente, o vetor de bits \gls{utprime} é processado para extrair o datagrama
 
 \section{IMPLEMENTAÇÃO DA BIBLIOTECA ARGOS-3}
 
-A implementação do transmissor e receptor ARGOS-3, conforme descrito nas seções \ref{sec:transmissor} e \ref{sec:receptor}, foi realizada em Python, utilizando bibliotecas open source como NumPy, SciPy e Matplotlib. O código-fonte completo do simulador está disponível no repositório GitHub \cite{githubrepository}, permitindo que outros alunos, professores e pesquisadores possam utilizar, modificar e contribuir para o desenvolvimento do projeto. A biblioteca ARGOS-3 utilizada na implementação pode ser instalada via `pip`, conforme mostrado no exemplo de instalação na \autoref{cod:install}. 
+A implementação do transmissor e receptor \gls{ARGOS-III}, conforme descrito nas seções \ref{sec:transmissor} e \ref{sec:receptor}, foi realizada em Python, utilizando bibliotecas open source como NumPy, SciPy e Matplotlib. O código-fonte completo do simulador está disponível no repositório GitHub \cite{githubrepository}, permitindo que outros alunos, professores e pesquisadores possam utilizar, modificar e contribuir para o desenvolvimento do projeto. A biblioteca ARGOS-3 utilizada na implementação pode ser instalada via `pip`, conforme mostrado no exemplo de instalação na \autoref{cod:install}. 
 
 \lstinputlisting[language=bash,caption={Exemplo de instalação da biblioteca},label=cod:install]{codigo/install.sh}
 
