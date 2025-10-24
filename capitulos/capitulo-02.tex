@@ -191,7 +191,7 @@ Os dados dos sensores são agrupados em conjuntos denominados `blocos de dados' 
 
 \subsection{Tamanho de mensagem}
 
-O campo de tamanho de mensagem \gls{Tm} é utilizado para informar ao receptor quantos blocos de dados estão sendo transmitidos no datagrama. Este campo é formado pelo número de blocos em formato binário \gls{Bm} e pelo bit de paridade \gls{Pm} para fechar uma seção de 4 bits. Como cada bloco possui 32 bits (exceto o primeiro), é possivel determinar o comprimento total dos dados de aplicação de \gls{Bm} = ($N_b - 1)_{2}$. O número de blocos \gls{Nb}, pode variar de um a oito, resultando no comprimento esperado de bits no receptor para cada caso, conforme o \autoref{quadro:comprimento-mensagem}. 
+O campo de tamanho de mensagem \gls{Tm} é utilizado para informar ao receptor quantos blocos de dados estão sendo transmitidos no datagrama. Este campo é formado pelo número de blocos em formato binário \gls{Bm} e pelo bit de paridade \gls{Pm} para fechar uma seção de 4 bits. Como cada bloco possui 32 bits (exceto o primeiro), é possível determinar o comprimento total dos dados de aplicação de \gls{Bm} = ($N_b - 1)_{2}$. O número de blocos \gls{Nb}, pode variar de um a oito, resultando no comprimento esperado de bits no receptor para cada caso, conforme o \autoref{quadro:comprimento-mensagem}. 
 
 \begin{quadro}[H]
     \caption{Comprimento em bits para cada tamanho de mensagem ($T_m$)}
@@ -203,7 +203,7 @@ O campo de tamanho de mensagem \gls{Tm} é utilizado para informar ao receptor q
                                   >{\centering\arraybackslash}X 
                                   >{\centering\arraybackslash}X}
         \toprule
-        \textbf{N° de Blocos ($N_b$)} & \textbf{N° de Bits} & \textbf{$B_m$} & \textbf{$P_m$} & \textbf{$T_m$}\\
+        \textbf{$N_b$} & \textbf{N° de Bits} & \textbf{$B_m$} & \textbf{$P_m$} & \textbf{$T_m$}\\
         \midrule
         1 & 24  & 000 & 0 & 0000\\
         2 & 56  & 001 & 1 & 0011\\
@@ -250,7 +250,7 @@ R_{PCD} = \left( \sum_{i=0}^{19} I_{PCD}[i] \cdot 2^i \right) \bmod 256 \text{ ,
 Ao final do datagrama, são inseridos entre sete e nove bits \texttt{0} com a finalidade de limpar o registrador do codificador convolucional, dando o encerramento da sequência codificada. Conforme o padrão \gls{ARGOS-III}, a quantidade de bits de fim de mensagem adicionados depende do comprimento total da mensagem do usuário, conforme apresentado na \autoref{quadro:bits-codificacao}. Apesar de não carregar dados úteis a nível de aplicação, esses bits são fundamentais para o correto funcionamento do processo de decodificação \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
 
 \begin{quadro}[H]
-    \caption{Comprimento da cauda (bits '0') para cada tamanho de mensagem}
+    \caption{Comprimento da cauda \texttt{0} para cada tamanho de mensagem}
     \label{quadro:bits-codificacao}
     \small 
     \begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X 
@@ -258,7 +258,7 @@ Ao final do datagrama, são inseridos entre sete e nove bits \texttt{0} com a fi
                                   >{\centering\arraybackslash}X 
                                   >{\centering\arraybackslash}X}
         \toprule
-        \textbf{N° de Blocos ($N_b$)} & \textbf{Bits Aplicação} & \textbf{Bits Datagrama} & \textbf{N° bits \texttt{0}} \\
+        \textbf{$N_b$} & \textbf{Bits Aplicação} & \textbf{Bits Datagrama} & \textbf{N° bits \texttt{0}} \\
         \midrule
         1 &  24 &  56 & 7 \\
         2 &  56 &  88 & 8 \\
@@ -301,12 +301,12 @@ A taxa de codificação utilizada no padrão \gls{PTT-A3} é $R = \text{1/2}$, o
     \end{split}
 \end{equation}
 
-Os vetores geradores são utilizados para definir a estrutura do registrador do codificação convolucional aplicada à sequência de entrada \gls{ut}, resultando nas saídas \gls{vt0} e \gls{vt1}, que são utilizadas posteriormente no processo de embaralhamento. Essa operação pode ser representada por uma multiplicação vetorial entre uma janela deslizante de sete bits da entrada e a matriz formada pelos vetores geradores, conforme
+Os vetores geradores são utilizados para definir a estrutura do registrador do codificador convolucional aplicado à sequência de entrada \gls{ut}, resultando nas saídas \gls{vt0} e \gls{vt1}, que são utilizadas posteriormente no processo de embaralhamento. Essa operação pode ser representada por uma multiplicação vetorial entre uma janela deslizante de sete bits da entrada e a matriz formada pelos vetores geradores, conforme
 
 \begin{equation}
 \begin{aligned}
     \begin{bmatrix}
-        v[n]^{(0)} & v[n]^{(1)}
+        v_0[n] & v_1[n]
     \end{bmatrix}
     &=
     \begin{bmatrix}
@@ -334,9 +334,9 @@ Os vetores geradores são utilizados para definir a estrutura do registrador do 
 
 \subsection{Embaralhador}
 
-Após a codificação convolucional, os vetores de saída \gls{vt0} e \gls{vt1} são embaralhados para evitar padrões repetitivos, formando os vetores embaralhados \gls{Xn} e \gls{Yn} de bits embaralhados. O embaralhador é utilizado para garantir que os dados sejam melhor distribuídos diminuindo a correlação entre os bits de forma a aumentar a aleatoriedade antes da modulação \gls{QPSK}, o que permite atingir uma melhor característica espectral do sinal transmitido \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
+Após a codificação convolucional, os vetores de saída \gls{vt0} e \gls{vt1} são embaralhados para evitar padrões repetitivos, formando os vetores \gls{Xn} e \gls{Yn} de bits embaralhados. O embaralhador é utilizado para garantir que os dados sejam melhor distribuídos diminuindo a correlação entre os bits de forma a aumentar a aleatoriedade antes da modulação \gls{QPSK}, o que permite atingir uma melhor característica espectral do sinal transmitido \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
 
-O embaralhador é implementado utilizando um registrador de deslocamento de três bits para cada canal, conforme apresentado na \autoref{fig:embaralhador}. A cada novo bit de entrada, o registrador é deslocado, e o bit de saida calculado através de uma multiplexação entre as três saidas possiveis. Desta forma o índice de embaralhamento de uma sequência de entrada é dado por
+O embaralhador é implementado utilizando um registrador de deslocamento de três bits para cada canal, conforme apresentado na \autoref{fig:embaralhador}. A cada novo bit de entrada, o registrador é deslocado, e o bit de saida calculado através de uma multiplexação entre as três saidas possíveis. Desta forma o índice de embaralhamento de uma sequência de entrada é dado por
 
 \vspace{-1em}
 \begin{equation}
@@ -450,7 +450,7 @@ Nota-se que utilizando formatação \gls{Rect}, o sinal apresenta transições a
     g(t) = \text{rect}\left(\frac{t}{T_b}\right)
 \end{equation}
 
-\noindent onde, \gls{gt} é a resposta ao impulso da função, \gls{t} é o tempo e \gls{Tb} é o período de bit. Já com o pulso \gls{RRC}, o sinal é suavizado no dominio do tempo, reduzindo a interferência entre símbolos e ajustando a largura de banda do sinal conforme os parâmetros do modulador de pulso \cite{cnes_services_and_message_formats_ed2_rev2_2006,10555531840,rodrigues_demodulador_2018}.
+\noindent onde, \gls{Tb} é o período de bit. Já com o pulso \gls{RRC}, o sinal é suavizado no dominio do tempo, reduzindo a interferência entre símbolos e ajustando a largura de banda do sinal conforme os parâmetros do modulador de pulso \cite{cnes_services_and_message_formats_ed2_rev2_2006,10555531840,rodrigues_demodulador_2018}.
 
 Dessa forma, podemos calcular a banda consumida (unilateral) do sinal modulado \gls{W} para modulação de pulso \gls{RRC} como 
 
@@ -489,7 +489,7 @@ No processo de modulação QPSK, o sinal em fase \gls{dI} é multiplicado por um
 
 \vspace{-0.8em}
 \begin{equation}
-    s(t) = A d_I'(t) \cos(2\pi f_c t + \phi_0) - Ad_Q'(t) \sin(2\pi f_c t + \phi_0) \text{ ,}
+    s(t) = A \cdot d_I(t) \cdot \cos(2\pi f_c t + \phi_0) - A \cdot d_Q(t) \cdot \sin(2\pi f_c t + \phi_0) \text{ ,}
 \end{equation}
 
 \noindent onde \gls{A} é a amplitude do sinal modulado, \gls{fc} é a frequência da portadora, em torno de $401{,}625$ \gls{mhz} e \gls{phi0} é o desvio de fase inicial do sinal, que é considerado como zero ($\phi_0 = 0$). A \autoref{fig:iq_modulation} ilustra o processo de modulação IQ, mostrando os sinais \gls{dI} e \gls{dQ} e a constelação resultante, onde cada ponto representa uma amostra no tempo \gls{t} dos canais $I$ e $Q$.
