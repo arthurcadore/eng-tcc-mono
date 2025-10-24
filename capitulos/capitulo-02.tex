@@ -291,7 +291,7 @@ Na \autoref{fig:diagrama_transmissor} ilustra-se o diagrama de blocos do transmi
 
 Antes da transmissão, os dados do datagrama precisam ser codificados, e esse processo é realizado através de um codificador convolucional. Essa técnica de codificação aplica uma operação lógica sobre uma janela deslizante de bits de entrada \gls{ut}, gerando uma sequência de saída com redundância controlada. Diferente da codificação por bloco, onde os dados são processados em blocos fixos, a codificação convolucional considera a sequência contínua de bits, combinando o bit atual com um número fixo de bits anteriores através de vetores geradores \cite{shu2011error}.
 
-A taxa de codificação utilizada no padrão \gls{PTT-A3} é $R = \text{1/2}$, o que significa que para cada bit de dados de entrada \gls{ut}, são gerados dois bits de saída, um no canal \gls{cI} e outro no canal \gls{cQ}, aumentando a redundância e melhorando a capacidade do sistema de detectar e corrigir erros. Para a codificação convolucional, são utilizados vetores geradores \gls{G0} e \gls{G1}, de acordo com o padrão CCSDS 131.1-G-2 \cite{cnes_services_and_message_formats_ed2_rev2_2006}. A representação binária dos vetores geradores é dada por
+No padrão \gls{ARGOS-III}, o código convolucional utilizado segue o padrão \gls{CCSDS} 131.1-G-2. Portanto a taxa de codificação utilizada é $R = \text{1/2}$, o que significa que para cada bit de dados de entrada \gls{ut}, são gerados dois bits de saída, um no canal \gls{cI} e outro no canal \gls{cQ}, aumentando a redundância e melhorando a capacidade do sistema de detectar e corrigir erros. Para a codificação convolucional, são utilizados vetores geradores \gls{G0} e \gls{G1}, de acordo com o padrão CCSDS 131.1-G-2 \cite{cnes_services_and_message_formats_ed2_rev2_2006}. A representação binária dos vetores geradores é dada por
 
 \vspace{-1em}
 \begin{equation}
@@ -505,7 +505,7 @@ A constelação \gls{QPSK} na \autoref{fig:iq_modulation} mapeia cada par de amo
 
 \section{RECEPTOR PTT-A3}\label{sec:receptor}
 
-Como a transmissão dos dados das \gls{PCD} não segue uma estrutura de canais discretos, ou seja, cada \gls{PCD} seleciona uma frequência \gls{fn} dentro da faixa de $401{,}62$ a $401{,}65$ \gls{mhz} e realiza a transmissão. Dessa forma, o receptor no satélite necessita de um mecanismo de detecção de portadora para avaliar as candidatas de \gls{fc}, podendo assim demodular o sinal.
+Como a transmissão dos dados das \gls{PCD} não segue uma estrutura de canais discretos, ou seja, cada \gls{PCD} seleciona uma frequência \gls{fn} dentro da faixa de $401{,}62$ a $401{,}65$ \gls{mhz} e realiza a transmissão para o satélite, o receptor precisa de um mecanismo para detectar quando houve uma tranmissão e onde essa transmissão está ocoorrendo no espectro. Esse mecanismo utilizado pelo satélite é denominado de detector de portadora, e é utilizado para avaliar as candidatas de \gls{fc}, podendo assim demodular o sinal transmitido pela \gls{PCD}.
 
 \begin{figure}[H]
 	\centering
@@ -517,31 +517,28 @@ Como a transmissão dos dados das \gls{PCD} não segue uma estrutura de canais d
 
 \subsection{Detecção de portadora}
 
-Para realizar a detecção da portadora, o sinal recebido acrescido de ruído deve ser inicialmente amostrado e dividido em segmentos discretos \gls{xn} no tempo. O satélite \gls{ARGOS} realiza a decisão do sinal a cada $10 \text{ms}$, esse processo é definido por 
+Para realizar a detecção da portadora, o sinal recebido acrescido de ruído deve ser inicialmente amostrado e dividido em segmentos discretos \gls{xn} no tempo. O satélite \gls{ARGOS} realiza a decisão do sinal a cada $10$ ms, esse processo é definido por 
 
-\vspace{-0.4em}
+\vspace{-1em}
 \begin{equation}
     x_n[m] = s(mT_n) \text{ ,}
 \end{equation}
 
-\noindent onde \gls{xn} representa o segmento de sinal, \gls{st} é o sinal recebido, \gls{m} é o índice de amostra do segmento de tempo e \gls{Tn} é o tempo de amostragem, definido como $T_n = f_s * 10 \text{ms}$, onde \gls{fs} é a frequência de amostragem do sistema. 
-
-
-Em seguida, aplica-se a \gls{FFT} no vetor \gls{xn}, obtendo-se o espectro de frequência do sinal amostrado \gls{xnk}, conforme a expressão 
+\noindent onde \gls{xn} representa o segmento de sinal, \gls{st} é o sinal recebido, \gls{m} é o índice de amostra do segmento de tempo e \gls{Tn} é o tempo de amostragem. Em seguida, aplica-se a \gls{FFT} no vetor \gls{xn}, obtendo-se o espectro de frequência do sinal amostrado \gls{xnk}, conforme a expressão 
 
 \vspace{-0.4em}
 \begin{equation}
     X_n[k] = \sum_{m=0}^{N-1} x_n[m]\, e^{-j2\pi km/N} \text{ .}
 \end{equation}
 
-A partir da amostras de \gls{xnk}, se calcula a potência em cada componente de frequência, para obter os valores \gls{Pnk}, conforme
+A partir das amostras de \gls{xnk}, se calcula a potência em cada componente de frequência, para obter os valores \gls{Pnk}, conforme
 
 \vspace{-0.4em}
 \begin{equation}
     P_n[k] = |X_n[k]|^2 \text{ .}
 \end{equation}
 
-Em seguida, para cada índice \gls{k} do espectro calculado, é feita uma comparação com um limiar pré-definido \gls{Pt}, conforme foi apresentado anteriormente na \autoref{fig:portadora_pura_freq}. Caso a potência \gls{Pnk} seja maior que \gls{Pt}, a frequência é registrada pois existe a possibilidade de que uma portadora \gls{fn} esteja presente naquela frequência. 
+Em seguida, para cada índice \gls{k} do espectro calculado, é feita uma comparação com um limiar pré-definido \gls{Pt}. Caso a potência \gls{Pnk} seja maior que \gls{Pt}, a frequência é registrada pois existe a possibilidade de que uma portadora \gls{fn} esteja presente naquela frequência. 
 
 Por fim, no proximo segmento, $X_{n+1}[k]$, o sistema verifica se a frequência registrada no segmento anterior persiste, ou seja, se a potência de $k$ também é maior que o limiar \gls{Pt}, caso positivo, o sistema considera que a frequência \gls{fn} é a portadora \gls{fc} do sinal recebido e instância a cadeia de recepção passando \gls{fc} como parâmetro.
 
@@ -549,11 +546,11 @@ Por fim, no proximo segmento, $X_{n+1}[k]$, o sistema verifica se a frequência 
 
 \subsection{Demodulador banda base}
 
-Para realizar a demodulação do sinal \gls{st} recebido retornando as componentes \gls{dXprime} e \gls{dYprime} em banda base, o sinal \gls{st} é multiplicado por duas portadoras ortogonais, \gls{xi} para demodular o canal \gls{cI} e \gls{yq} para demodular o canal \gls{cQ}. Assumindo sincronismo perfeito, o processo de demodulação para o canal \gls{cI} pode ser expresso como
+Para realizar a demodulação do sinal \gls{stprime} recebido retornando as componentes \gls{dXprime} e \gls{dYprime} em banda base, o sinal \gls{st} é multiplicado por duas portadoras ortogonais, \gls{xi} para demodular o canal \gls{cI} e \gls{yq} para demodular o canal \gls{cQ}. Assumindo sincronismo perfeito, o processo de demodulação para o canal \gls{cI} pode ser expresso como
 
 \vspace{-1.2em}
 \begin{equation}
-d_X'(t) = s(t) \cdot x_I(t) = \left[A \cdot d_I'(t) \cos(2\pi f_c t ) - A \cdot d_Q'(t) \sin(2\pi f_c t )\right] \cdot 2\cos(2\pi f_c t )
+d_X'(t) = \left[A \cdot d_I'(t) \cos(2\pi f_c t ) - A \cdot d_Q'(t) \sin(2\pi f_c t )\right] \cdot 2\cos(2\pi f_c t )
 \end{equation}
 \vspace{-0.8em}
 \begin{equation}
@@ -569,7 +566,7 @@ d_X'(t) = s(t) \cdot x_I(t) = \left[A \cdot d_I'(t) \cos(2\pi f_c t ) - A \cdot 
 
 \vspace{-1.2em}
 \begin{equation}
-d_Y'(t) = s(t) \cdot y_Q(t) = \left[A \cdot d_I'(t) \cos(2\pi f_c t ) - A \cdot d_Q'(t) \sin(2\pi f_c t )\right] \cdot 2\sin(2\pi f_c t )
+d_Y'(t) = \left[A \cdot d_I'(t) \cos(2\pi f_c t ) - A \cdot d_Q'(t) \sin(2\pi f_c t )\right] \cdot 2\sin(2\pi f_c t )
 \end{equation}
 \vspace{-0.8em}
 \begin{equation}
@@ -622,13 +619,13 @@ Para o \gls{LPF}, o filtro Butterworth é escolhido por sua resposta em frequên
 \noindent onde \gls{n} é a ordem do filtro (neste caso, $n=6$) e \gls{fc} é a frequência de corte do filtro, definida como $720$ \gls{hz}. 
 
 
-Os polos e zeros do filtro Butterworth também podem ser calculados com base na função de transferência discreta \gls{Hz} do filtro. O calculo dos coeficientes de \gls{Hz} do filtro foram realizados utilizando a biblioteca \textit{scipy.signal} do Python, que implementa o método de bilinearização para a conversão da função de transferência contínua \gls{Hs} para o dominio discreto, a função de transferência discreta é dada por
+Os polos e zeros do filtro Butterworth também podem ser calculados com base na função de transferência discreta \gls{Hz} do filtro. O calculo dos coeficientes de \gls{Hz} do filtro foram realizados utilizando a biblioteca \textit{scipy.signal} do Python, que implementa o método de bilinearização para a conversão da função de transferência contínua \gls{Hs} para o dominio discreto. A função de transferência discreta é dada por
 
 \begin{equation}
     H(z) = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2} + ... + b_m z^{-m}}{a_0 + a_1 z^{-1} + a_2 z^{-2} + ... + a_n z^{-n}} \text{ ,}
 \end{equation}
 
-\noindent onde $b_0$, $b_1$, ..., $b_m$ são os coeficientes do numerador (zeros) e $a_0$, $a_1$, ..., $a_n$ são os coeficientes do denominador (polos) da função de transferência do filtro digital, assim podemos plotar os coeficientes de \gls{Hz} no plano complexo, conforme apresentado na \autoref{fig:butterworth_poles} \cite{10555531840}.
+\noindent onde $b_0$, $b_1$, ..., $b_m$ são os coeficientes do numerador (zeros) e $a_0$, $a_1$, ..., $a_n$ são os coeficientes do denominador (polos) da função de transferência do filtro digital. Assim podemos plotar os coeficientes de \gls{Hz} no plano complexo, conforme apresentado na \autoref{fig:butterworth_poles} \cite{10555531840}.
 
 \begin{figure}[H]
     \centering
@@ -695,11 +692,12 @@ Uma vez com os sinais \gls{dXprime} e \gls{dYprime} filtrados, considerando sinc
 Os valores amostrados \gls{Inprime} e \gls{Qnprime} são então decididos, isto é, quantizados para valores discretos, correspondendo aos símbolos transmitidos. O mapeamento dos pares pode ser expressado como
 
 \begin{equation} 
-    I'[n] = \begin{cases}
+    \text{quant}(I'[n]) = \begin{cases} 
     +1, & \text{se } I'[n] \geq 0 \\
     -1, & \text{se } I'[n] < 0
-    \end{cases}, \quad
-    Q'[n] = \begin{cases}
+    \end{cases}
+    \quad \text{e} \quad
+    \text{quant}(Q'[n]) = \begin{cases} 
     +1, & \text{se } Q'[n] \geq 0 \\
     -1, & \text{se } Q'[n] < 0
     \end{cases} \text{ ,}
@@ -754,11 +752,11 @@ O desembaralhador utiliza a mesma estrutura lógica do embaralhador, porém exec
 
 O processo de desembaralhamento retorna os vetores de bit, \gls{vt0prime} e \gls{vt1prime}, que correspondem aos dados codificados nos canais \gls{cI} e \gls{cQ}, respectivamente.
 
-\subsection{Decodificador convolucional}
+\subsection{Decodificador convolucional}\label{sec:convolutional_decoder}
 
-Após o desembaralhamento, os vetores \gls{vt0prime} e \gls{vt1prime} estão prontos para a decodificação convolucional para obter novamente a sequência \gls{utprime} correspondente ao vetor de bits do datagrama. O algoritmo mais popularmente utilizado para essa etapa é o algoritmo de Viterbi, que implementa a decodificação \gls{MLD} para códigos convolucionais, calculando o caminho mais provável através de \gls{Hamming} para a mensagem recebida em relação à mensagem possível \cite{cnes_services_and_message_formats_ed2_rev2_2006, rodrigues_demodulador_2018}.
+Após o desembaralhamento, os vetores \gls{vt0prime} e \gls{vt1prime} estão prontos para a decodificação convolucional para obter novamente a sequência \gls{utprime} correspondente ao vetor de bits do datagrama. O algoritmo mais popularmente utilizado para essa etapa é o algoritmo de Viterbi, que implementa a decodificação \gls{MLD} para códigos convolucionais, calculando o caminho mais provável através de \textit{Hamming Distance} para a mensagem recebida em relação à mensagem possível \cite{cnes_services_and_message_formats_ed2_rev2_2006, rodrigues_demodulador_2018}.
 
-No padrão \gls{ARGOS-III}, o código convolucional utilizado segue o padrão \gls{CCSDS} 131.1-G-2, que, por sua vez, possui uma distância livre conhecida de $\text{\gls{dfree}} = 10$. Quanto maior for o valor de \gls{dfree}, maior será a robustez do código e sua capacidade de detectar e corrigir erros.
+Conforme mencionado anteriormente na \autoref{sec:conv_coding}, o padrão utilizado no \gls{ARGOS-III} é o \gls{CCSDS} 131.1-G-2, que, por sua vez, possui uma distância livre conhecida de $\text{\gls{dfree}} = 10$. Quanto maior for o valor de \gls{dfree}, maior será a robustez do código e sua capacidade de detectar e corrigir erros.
 
 \noindent Assim, conforme o comparativo ilustrado na \autoref{fig:curva_bersnr} entre a transmissão \gls{QPSK} sem codificação e com codificação convolucional, o uso desta técnica na transmissão do sinal permite operar em valores de \gls{EbN0} menores em relação a não utilização do codificador, para a \gls{BER} visada pelo sistema, permitindo uso em ambientes com maior ruído para a mesma taxa de erro desejada.
 
