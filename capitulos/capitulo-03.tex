@@ -4,11 +4,19 @@ Este capítulo apresenta a implementação do sistema de comunicação digital p
 
 \section{CADEIA DE TRANSMISSÃO}\label{sec:transmissao}
 
-A primeira etapa do sistema é a geração da sequência de bits que compõem o datagrama \gls{ARGOS-III}, conforme descrito na Seção \ref{sec:datagrama}. Essa sequência é multiplexada com um preâmbulo para permitir a sincronização de símbolos no receptor. Em seguida, os bits são codificados utilizando codificação de linha para melhorar as características espectrais do sinal modulado, como detalhado na Seção \ref{sec:line_coding}.
+Na \autoref{fig:diagrama_transmissor} ilustra-se o diagrama de blocos do transmissor \gls{PTT-A3}. Cada bloco é responsável por uma etapa da transmissão, desde a montagem do datagrama até a modulação em banda passante e a transmissão do sinal \gls{st}.
+
+\begin{figure}[H]
+	\centering
+	\caption{Diagrama de blocos do transmissor ARGOS-3}\label{fig:diagrama_transmissor}
+	\includegraphics[width=\linewidth]{assets/cap2/transmissor.pdf}
+    
+    \fonteproprioautor
+\end{figure}
 
 \subsection{Sequência de transmissão}\label{sec:geracao_bits}
 
-O primeiro passo na cadeia de transmissão é a geração da sequência de bits que compõem o datagrama \gls{ARGOS-III}, conforme ilustrado na \autoref{fig:datagrama_time}, para a montagem do datagrama é necessário o número de identificação da PCD, \gls{ipcd}, e os dados que serão transmitidos (payload), conforme detalhado na seção \ref{sec:datagrama}, desta forma, o comprimento da mensagem \gls{Tm}, o campo de identificação da PCD \gls{pcdid} e a cauda do datagrama \gls{Em} podem ser calculados. 
+O primeiro passo na cadeia de transmissão é a geração da sequência de bits que compõem o datagrama \gls{ARGOS-III}, conforme ilustrado na \autoref{fig:datagrama_time}. Para a montagem do datagrama é necessário o número de identificação da PCD, \gls{ipcd}, e os dados que serão transmitidos (payload), conforme detalhado na seção \ref{sec:datagrama}. Desta forma, o comprimento da mensagem \gls{Tm}, o campo de identificação da PCD \gls{pcdid} e a cauda do datagrama \gls{Em} podem ser calculados. 
 
 \begin{figure}[H]
 	\centering
@@ -17,7 +25,7 @@ O primeiro passo na cadeia de transmissão é a geração da sequência de bits 
     \fonteproprioautor
 \end{figure}
 
-Após a montagem dos bits \gls{ut} do datagrama, os mesmos são codificados utilizando codificação convolucional, conforme detalhado na seção \ref{sec:conv_coding}, resultando nos vetores de bits \gls{vt0} e \gls{vt1}, que por sua vez são embaralhados resultando nas sequências \gls{Xn} e \gls{Yn} para os canais \gls{cI} e \gls{cQ}, respectivamente, o processo de codificação convolucional aplicado no vetor \gls{ut} é ilustrado na \autoref{fig:transmitter_conv_time}.
+Após a montagem dos bits \gls{ut} do datagrama, os mesmos são codificados utilizando codificação convolucional, conforme detalhado na seção \ref{sec:conv_coding}, resultando nos vetores de bits \gls{vt0} e \gls{vt1}, esses vetores então, são embaralhados resultando nas sequências \gls{Xn} e \gls{Yn} para os canais \gls{cI} e \gls{cQ}, respectivamente. O processo de codificação convolucional aplicado no vetor \gls{ut} é ilustrado na \autoref{fig:transmitter_conv_time}.
 
 \begin{figure}[H]
 	\centering
@@ -35,7 +43,7 @@ As sequências \gls{Xn} e \gls{Yn} já embaralhadas, são então multiplexadas c
     \fonteproprioautor
 \end{figure}
 
-Em seguida, os bits são codificados utilizando codificação de linha para melhorar as características espectrais do sinal modulado, como detalhado na seção \ref{sec:line_coding}, neste processo é utilizado apenas codificação \gls{NRZ} para os dois canais, pois a técnica \gls{Manchester} será aplicada posteriormente na modulação de pulso do canal \gls{cQ}, o processo de codificação de linha de ambos os canais é ilustrado na \autoref{fig:encoder_time}.
+Em seguida, os bits são codificados utilizando codificação de linha para melhorar as características espectrais do sinal modulado, como detalhado na seção \ref{sec:line_coding}. Neste processo é utilizado apenas codificação \gls{NRZ} para os dois canais, pois a técnica \gls{Manchester} será aplicada posteriormente na modulação de pulso do canal \gls{cQ}, o processo de codificação de linha de ambos os canais é ilustrado na \autoref{fig:encoder_time}.
 
 \begin{figure}[H]
 	\centering
@@ -80,7 +88,7 @@ Onde $g_{MAN}(t)$ é o pulso Manchester, $g_{RRC}(t)$ é o pulso RRC e $T_b$ é 
 W_{MAN} = 2 \cdot \frac{1 + \alpha}{T_b}
 \end{equation}
 
-\noindent Onde $W_{MAN}$ é a largura de banda (unilateral) do pulso \gls{Manchester}, $\alpha$ é o fator de roll-off do pulso \gls{RRC} e $T_b$ é o tempo de bit. Assim, a largura de banda \gls{W} do sinal modulado em \gls{Manchester} considerando um tempo de bits $T_b = 1/400$ e um fator de roll-off $\beta = 0.8$, é de $720 Hz$ (unilateral), ou seja, $2W = 1440 Hz$ (bilateral). A resposta ao impulso do filtro \gls{Manchester} é ilustrada na \autoref{fig:impulse_response_man}.
+\noindent Onde $W_{MAN}$ é a largura de banda (unilateral) do pulso \gls{Manchester}, $\alpha$ é o fator de roll-off do pulso \gls{RRC} e $T_b$ é o tempo de bit. Assim, a largura de banda \gls{W} do sinal modulado em \gls{Manchester} considerando um tempo de bits $T_b = 2{,}5$ ms e um fator de roll-off $\beta = 0.8$, é de $720$ Hz (unilateral), ou seja, $2W = 1440$ Hz (bilateral). A resposta ao impulso do filtro \gls{Manchester} é ilustrada na \autoref{fig:impulse_response_man}.
 
 \begin{figure}[H]
 	\centering
@@ -104,7 +112,7 @@ O resultado são as sequências \gls{dI} e \gls{dQ} contínuas ao longo do tempo
     \fonteproprioautor
 \end{figure}
 
-Além da mudança nas caracteristicas do sinal no dominio do tempo, pode-se observar também a mudança no espectro do sinal, onde é possível observar a largura de banda \gls{W} do sinal, conforme ilustrado detalhado na seção \ref{sec:pulse_modulation}.  As sequências \gls{dI} e \gls{dQ} estão agora prontas para serem moduladas em banda passante utilizando modulação em fase em quadratura (\gls{QPSK}), conforme detalhado na seção \ref{sec:qpsk}. 
+Além da mudança nas caracteristicas do sinal no dominio do tempo, pode-se observar também a mudança no espectro do sinal, onde é possível observar a largura de banda \gls{W} de primeiro lóbulo do sinal, conforme ilustrado detalhado na seção \ref{sec:pulse_modulation}.  As sequências \gls{dI} e \gls{dQ} estão agora prontas para serem moduladas em banda passante utilizando modulação em fase em quadratura (\gls{QPSK}), conforme detalhado na seção \ref{sec:qpsk}. 
 
 \subsection{Modulação em fase em quadratura (QPSK)}\label{sec:qpsk}
 
@@ -138,14 +146,8 @@ Ao se observar as figuras \ref{fig:transmitter_modulator_time} e \ref{fig:transm
 
 \noindent Onde $1(t)$ é a componente \gls{dI} com valor constante $`1`$ e $0(t)$ é a componente \gls{dQ} com valor constante $`0`$. O período de portadora pura é fundamental para o receptor identificar a frequência da portadora \gls{fc} e realizar a detecção do sinal corretamente, conforme detalhado na seção \ref{sec:detector}. A duração do período de portadora pura é definida pelo parâmetro \gls{Pd}, que no padrão \gls{ARGOS-III} é aproximadamente $0.082$ segundos.
 
-Com o sinal modulado em banda passante \gls{st} conforme definido acima, podemos também verificar a presença da portadora pura nos primeiros instantes da transmissão, isto é ilustrado na figura \ref{fig:transmitter_modulator_portadora}.
+Com o sinal modulado em banda passante \gls{st} conforme definido acima, podemos também verificar a presença da portadora pura nos primeiros instantes da transmissão, isto é ilustrado na figura \ref{fig:transmitter_modulator_time}, apresentada anteriormente.
 
-\begin{figure}[H]
-	\centering
-	\caption{Comparação de portadora pura e sinal modulado}\label{fig:transmitter_modulator_portadora}
-	\includegraphics[width=\linewidth]{assets/cap3/transmitter_modulator_portadora.pdf}
-    \fonteproprioautor
-\end{figure}
 
 \section{CANAL E ADIÇÃO DE RUÍDO}\label{sec:canal}
 
@@ -191,7 +193,9 @@ Uma vez com as transmissões adicionadas ao canal, o próximo passo é a geraç�
 
 \section{DETECÇÃO DE PORTADORA}\label{sec:detector}
 
-Com as múltiplas transmissões e o ruído adicionados ao canal, o próximo passo é a detecção das portadoras presentes no canal para posterior recepção. A detecção de portadora é realizada através de um processo de segmentação do sinal recebido em segmentos \gls{xn}, análise do espectro de cada segmento para identificação de componentes com potência acima de um limiar definido \gls{Pt}, e decisão sobre quais componentes serão consideradas como portadoras válidas. O diagrama de blocos do detector é ilustrado na \autoref{fig:detector_diagram}.
+Como a transmissão dos dados das \gls{PCD} não segue uma estrutura de canais discretos, ou seja, cada \gls{PCD} seleciona uma frequência \gls{fn} dentro da faixa de $401{,}62$ a $401{,}65$ \gls{mhz} e realiza a transmissão para o satélite, o receptor precisa de um mecanismo para detectar quando houve uma transmissão e onde essa transmissão está ocoorrendo no espectro. Esse mecanismo utilizado pelo satélite é denominado de detector de portadora, e é utilizado para avaliar as candidatas de \gls{fc}, podendo assim demodular o sinal transmitido pela \gls{PCD} \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
+
+A detecção de portadora é realizada através de um processo de segmentação do sinal recebido em segmentos \gls{xn}, análise do espectro de cada segmento para identificação de componentes com potência acima de um limiar definido \gls{Pt}, e decisão sobre quais componentes serão consideradas como portadoras válidas. O diagrama de blocos do detector é ilustrado na \autoref{fig:detector_diagram}.
 
 \begin{figure}[H]
 	\centering
@@ -211,7 +215,7 @@ O primeiro passo na detecção de portadora é a segmentação do sinal recebido
     \fonteproprioautor
 \end{figure}
 
-Na \ref{fig:waterfall} é possível observar claramente a presença das transmissões realizadas, além disso, nota-se que no inicio de cada transmissão a uma sequência de altas componentes, formando uma linha, que corresponde ao período de portadora pura \gls{Pd}, conforme detalhado na seção \ref{sec:qpsk}.
+Na figura \ref{fig:waterfall} é possível observar claramente a presença das transmissões realizadas, além disso, nota-se que no inicio de cada transmissão a uma sequência de altas componentes, formando uma linha, que corresponde ao período de portadora pura \gls{Pd}, conforme detalhado na seção \ref{sec:qpsk}.
 
 \subsection{Detecção de componentes no espectro}\label{sec:comparacao_potencia}
 
@@ -291,27 +295,35 @@ Para cada componente \gls{fcprime} decidida como portadora válida, tendo seu se
 
 \section{CADEIA DE RECEPÇÃO}\label{sec:recepcao}    
 
-A cadeia de recepção é responsável por recuperar o datagrama transmitido a partir do sinal recebido \gls{stprime}, que foi segmentado e identificado como uma portadora válida na etapa de detecção de portadora, conforme detalhado na seção \ref{sec:detector}. A cadeia de recepção é dividida em demodulação em banda base, filtragem, sincronização de símbolos, decisão de símbolos e recuperação do datagramam conforme apresentado na seção \ref{sec:receptor}
-
-\subsection{Demodulação banda base}\label{sec:demodulacao}
-
-O primeiro passo na cadeia de recepção é a demodulação do sinal recebido \gls{stprime} para retornar o sinal para banda base. Para isso, é necessário injetar uma componente senoidal e cossenoidal no \gls{stprime} com a mesma frequência \gls{fcprime} da portadora detectada, fazendo com que o sinal seja transladado, isto é, deslocado para banda base formando as componentes \gls{dXprime} e \gls{dYprime}, o processo de demodulação também faz com que uma componente identica seja gerada na frequência $2 \cdot \gls{fcprime}$, esse processo é ilustrado na \autoref{fig:receiver_demodulator}.
+Após a detecção da portadora e a segmentação do sinal recebido \gls{st} em segmentos \gls{stprime}, o próximo passo é a recepção do sinal, que envolve a demodulação do sinal para banda base, filtragem, sincronização de símbolos, amostragem, decisão de símbolos e decodificação para recuperar os bits transmitidos. O diagrama de blocos do receptor é ilustrado na \autoref{fig:diagrama_receptor}.
 
 \begin{figure}[H]
 	\centering
-	\caption{Demodulação banda base dos canais $I$ e $Q$}\label{fig:receiver_demodulator}
-	\includegraphics[width=\linewidth]{assets/cap3/receiver_demodulator_time.pdf}
+	\caption{Diagrama de blocos do receptor ARGOS-3}\label{fig:diagrama_receptor}
+	\includegraphics[width=\linewidth]{assets/cap2/receptor.pdf}
+    \fonteproprioautor
+\end{figure}
+
+
+\subsection{Demodulação banda base}\label{sec:demodulacao}
+
+O primeiro passo na cadeia de recepção é a demodulação do sinal recebido \gls{stprime} para retornar o sinal para banda base. Para isso, é necessário injetar uma componente senoidal e cossenoidal no \gls{stprime} com a mesma frequência \gls{fcprime} da portadora detectada, fazendo com que o sinal seja transladado, isto é, deslocado para banda base formando as componentes \gls{dXprime} e \gls{dYprime}, o processo de demodulação também faz com que uma componente identica seja gerada na frequência $2 \cdot \gls{fcprime}$, esse processo é ilustrado na \autoref{fig:receiver_demodulator}  \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
+
+\begin{figure}[H]
+	\centering
+	\caption{Componentes $I$ e $Q$ após demodulação}\label{fig:receiver_demodulator}
+	\includegraphics[width=\linewidth]{assets/cap2/receiver_demodulator_freq.pdf}
     \fonteproprioautor
 \end{figure}
 
 \subsection{Filtragem}\label{sec:filtragem}
 
-Após a demodulação, o próximo passo é a filtragem dos canais \gls{cI} e \gls{cQ} para remover as componentes de alta frequência geradas no processo de demodulação, bem como reduzir o máximo possível ruído presente em cada canal. A filtragem é realizada em duas etapas, primeiramente uma filtragem passa baixa para remover as componentes de alta frequência, conforme detalhado na seção \ref{sec:filtering}, resultando nos sinais \gls{dIprime} e \gls{dQprime}, conforme ilustrado na \autoref{fig:receiver_lpf}.
+Após a demodulação, o próximo passo é a filtragem dos canais \gls{cI} e \gls{cQ} para remover as componentes de alta frequência geradas no processo de demodulação, bem como reduzir o máximo possível ruído presente em cada canal. A filtragem é realizada em duas etapas, primeiramente uma filtragem passa baixa para remover as componentes de alta frequência, conforme detalhado na seção \ref{sec:filtering}. A \autoref{fig:lowpassfilter} apresenta o espectro dos sinais \gls{dXprime} e \gls{dYprime} antes e após a filtragem passa-baixa, bem como a resposta em frequência \gls{Hf} do filtro, onde é possível observar a remoção das componentes de alta frequência, deixando apenas os sinais em banda base, além da frequência de corte do filtro (onde a atenuação alcança $-3$ \gls{db}).
 
 \begin{figure}[H]
 	\centering
-	\caption{Filtragem passa baixa dos canais $I$ e $Q$}\label{fig:receiver_lpf}
-	\includegraphics[width=\linewidth]{assets/cap3/receiver_lpf_time.pdf}
+	\caption{Componentes $I$ $Q$ após filtragem passa baixa}\label{fig:lowpassfilter}
+	\includegraphics[width=\linewidth]{assets/cap2/receiver_lpf_freq.pdf}
     \fonteproprioautor
 \end{figure}
 
@@ -467,4 +479,4 @@ Com base na implementação do receptor e transmissor apresentada nas seções \
     \fonteproprioautor
 \end{figure}
 
-Nota-se que o desempenho do sistema ARGOS-3 está melhor do que o desempenho teórico e simulado da modulação \gls{QPSK} pura, para um dado valor de \gls{BER} requerido para o sistema. Essa diferença pode ser explicada pela presença do código convolucional, que adiciona redundância e possibilidade de regressão de erros aos dados transmitidos, além da presença da técnica de codificação de linha \gls{Manchester}, que também contribui para a melhoria das características do sinal modulado.
+Nota-se que o desempenho do sistema ARGOS-3 está melhor do que o desempenho teórico e simulado da modulação \gls{QPSK} pura (considerando \gls{EbN0} maior ou igual a 4,5), para um dado valor de \gls{BER} requerido para o sistema. Essa diferença pode ser explicada pela presença do código convolucional, que adiciona redundância e possibilidade de regressão de erros aos dados transmitidos, além da presença da técnica de codificação de linha \gls{Manchester}, que também contribui para a melhoria das características do sinal modulado.

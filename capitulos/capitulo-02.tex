@@ -276,16 +276,7 @@ Ao final do datagrama, são inseridos entre sete e nove bits \texttt{0} com a fi
 
 \section{TRANSMISSOR PTT-A3}\label{sec:transmissor}
 
-Na \autoref{fig:diagrama_transmissor} ilustra-se o diagrama de blocos do transmissor \gls{PTT-A3}. Cada bloco é responsável por uma etapa da transmissão, desde a montagem do datagrama até a modulação em banda passante e a transmissão do sinal \gls{st}.
-
-\begin{figure}[H]
-	\centering
-	\caption{Diagrama de blocos do transmissor ARGOS-3}\label{fig:diagrama_transmissor}
-	\includegraphics[width=\linewidth]{assets/cap2/transmissor.pdf}
-    
-    \fonteproprioautor
-\end{figure}
-
+O transmissor do tipo \gls{PTT-A3} é responsável por processar os dados do datagrama e convertê-los em um sinal modulado \gls{QPSK} para transmissão via satélite. Esse processo envolve várias etapas, incluindo a codificação convolucional, o embaralhamento dos dados, a modulação \gls{QPSK} e a geração do sinal final para transmissão. A seguir, são detalhados os componentes utilizados na estrutura do transmissor \gls{PTT-A3}.
 
 \subsection{Codificador convolucional}\label{sec:conv_coding}
 
@@ -388,12 +379,12 @@ Q[n] =
 \end{equation}
 
 \noindent resultando assim em um vetor de saída \gls{Qn} codificado em Manchester.
-\begin{figure}[H]
-	\centering
-	\caption{Codificação de linha dos vetores I e Q}\label{fig:line_coding}
-	\includegraphics[width=\linewidth]{assets/cap2/example_encoder_time.pdf}
-    \fonteproprioautor
-\end{figure}
+% \begin{figure}[H]
+% 	\centering
+% 	\caption{Codificação de linha dos vetores I e Q}\label{fig:line_coding}
+% 	\includegraphics[width=\linewidth]{assets/cap2/example_encoder_time.pdf}
+%     \fonteproprioautor
+% \end{figure}
 
 
 \subsection{Modulação de Pulso}\label{sec:pulse_modulation}
@@ -427,18 +418,18 @@ Para aplicar a modulação de pulso e gerar os sinais analógicos \gls{dI} e \gl
     \end{cases} \text{ .}
 \end{equation}
 
-A formatação dos vetores \gls{In} e \gls{Qn} é ilustrada na \autoref{fig:pulse_modulate}, onde a resposta ao impulso \gls{gt} é apresentada em conjunto com os sinais \gls{dI} e \gls{dQ}. 
+% A formatação dos vetores \gls{In} e \gls{Qn} é ilustrada na \autoref{fig:pulse_modulate}, onde a resposta ao impulso \gls{gt} é apresentada em conjunto com os sinais \gls{dI} e \gls{dQ}. 
 
-\begin{figure}[H]
-	\caption{Modulação de pulso dos canais $I$ e $Q$}\label{fig:pulse_modulate}
-	\includegraphics[width=\linewidth]{assets/cap2/example_formatter_comp_rrc.pdf}
-    \fonteproprioautor
-\end{figure}
+% \begin{figure}[H]
+% 	\caption{Modulação de pulso dos canais $I$ e $Q$}\label{fig:pulse_modulate}
+% 	\includegraphics[width=\linewidth]{assets/cap2/example_formatter_comp_rrc.pdf}
+%     \fonteproprioautor
+% \end{figure}
 
 Quanto maior o \gls{alpha}, mais suave é a transição entre os símbolos, mas também maior é a largura de banda ocupada. A \autoref{fig:formatter_comp} apresenta a comparação entre os sinais \gls{dI} e \gls{dQ} quando é aplicada a modulação de pulso com pulso \gls{RRC} e \gls{Rect} \cite{10555531840}.
 
 \begin{figure}[H]
-	\caption{Comparação entre modulação de pulso \gls{RRC} e \gls{Rect}}\label{fig:formatter_comp}
+	\caption{Comparação entre modulação de pulso RRC e Rect}\label{fig:formatter_comp}
 	\includegraphics[width=\linewidth]{assets/cap2/example_formatter_comp.pdf}
     \fonteproprioautor
 \end{figure}
@@ -466,13 +457,15 @@ Dessa forma, podemos calcular a banda consumida (unilateral) do sinal modulado \
     W_{Rect} = \frac{1}{T_b} \text{ .}
 \end{equation}
 
-\noindent Assim, a largura de banda \gls{W} do sinal modulado em \gls{RRC} considerando um tempo de bit \gls{Tb} = $1 / 400$ e um fator de roll-off $\alpha = 0{,}8$ é de 360 \gls{hz} (banda unilateral), ou seja, $2W = 720 \text{\gls{hz}}$ de banda bilateral, em contraste com os 800 \gls{hz} de banda (bilateral) do sinal modulado em \gls{Rect}. Na \autoref{fig:formatter_freq_comp} é possível observar a diferença na banda consumida pelos sinais \gls{dI} e \gls{dQ} após a modulação de pulso sobre os canais.
+\noindent Assim, a largura de banda \gls{W} do sinal modulado em \gls{RRC} considerando um tempo de bit \gls{Tb} = $1 / 400$ e um fator de roll-off $\alpha = 0{,}8$ é de 360 \gls{hz} (banda unilateral), ou seja, $2W = 720 \text{\gls{hz}}$ de banda bilateral, em contraste com os 800 \gls{hz} de banda (bilateral) do sinal modulado em \gls{Rect}. 
 
-\begin{figure}[H]
-	\caption{Banda consumida nos canais $I$ e $Q$}\label{fig:formatter_freq_comp}
-	\includegraphics[width=\linewidth]{assets/cap2/example_formatter_freq_comp.pdf}
-    \fonteproprioautor
-\end{figure}
+% Na \autoref{fig:formatter_freq_comp} é possível observar a diferença na banda consumida pelos sinais \gls{dI} e \gls{dQ} após a modulação de pulso sobre os canais.
+
+% \begin{figure}[H]
+% 	\caption{Banda consumida nos canais $I$ e $Q$}\label{fig:formatter_freq_comp}
+% 	\includegraphics[width=\linewidth]{assets/cap2/example_formatter_freq_comp.pdf}
+%     \fonteproprioautor
+% \end{figure}
 
 \subsection{Modulação em banda passante} 
 
@@ -492,28 +485,11 @@ No processo de modulação QPSK, o sinal em fase \gls{dI} é multiplicado por um
     s(t) = A \cdot d_I(t) \cdot \cos(2\pi f_c t + \phi_0) - A \cdot d_Q(t) \cdot \sin(2\pi f_c t + \phi_0) \text{ ,}
 \end{equation}
 
-\noindent onde \gls{A} é a amplitude do sinal modulado, \gls{fc} é a frequência da portadora, em torno de $401{,}625$ \gls{mhz} e \gls{phi0} é o desvio de fase inicial do sinal, que é considerado como zero ($\phi_0 = 0$). A \autoref{fig:iq_modulation} ilustra o processo de modulação IQ, mostrando os sinais \gls{dI} e \gls{dQ} e a constelação resultante, onde cada ponto representa uma amostra no tempo \gls{t} dos canais $I$ e $Q$.
-
-\begin{figure}[H]
-	\centering
-	\caption{Modulação em banda passante dos canais $I$ e $Q$}\label{fig:iq_modulation}
-	\includegraphics[width=\linewidth]{assets/cap2/transmitter_modulator_time_comp.pdf}
-    \fonteproprioautor
-\end{figure}
-
-A constelação \gls{QPSK} na \autoref{fig:iq_modulation} mapeia cada par de amostra dos vetores \gls{dI} e \gls{dQ} no plano complexo ($I + jQ$).
+\noindent onde \gls{A} é a amplitude do sinal modulado, \gls{fc} é a frequência da portadora, em torno de $401{,}625$ \gls{mhz} e \gls{phi0} é o desvio de fase inicial do sinal, que é considerado como zero ($\phi_0 = 0$). 
 
 \section{RECEPTOR PTT-A3}\label{sec:receptor}
 
-Como a transmissão dos dados das \gls{PCD} não segue uma estrutura de canais discretos, ou seja, cada \gls{PCD} seleciona uma frequência \gls{fn} dentro da faixa de $401{,}62$ a $401{,}65$ \gls{mhz} e realiza a transmissão para o satélite, o receptor precisa de um mecanismo para detectar quando houve uma tranmissão e onde essa transmissão está ocoorrendo no espectro. Esse mecanismo utilizado pelo satélite é denominado de detector de portadora, e é utilizado para avaliar as candidatas de \gls{fc}, podendo assim demodular o sinal transmitido pela \gls{PCD}.
-
-\begin{figure}[H]
-	\centering
-	\caption{Diagrama de blocos do receptor ARGOS-3}\label{fig:diagrama_receptor}
-	\includegraphics[width=\linewidth]{assets/cap2/receptor.pdf}
-    \fonteproprioautor
-\end{figure}
-
+O receptor do tipo \gls{PTT-A3} é responsável por processar o sinal modulado \gls{st} recebido via satélite, extraindo os dados do datagrama transmitido. Esse processo envolve várias etapas, incluindo a detecção da portadora, a demodulação em banda base, a amostragem e decisão dos símbolos, o decodificador convolucional e o desembaralhador. A seguir, são detalhados os componentes utilizados na estrutura do receptor \gls{PTT-A3}. 
 
 \subsection{Detecção de portadora}
 
@@ -578,17 +554,8 @@ d_Y'(t) = \left[A \cdot d_I'(t) \cos(2\pi f_c t ) - A \cdot d_Q'(t) \sin(2\pi f_
     \right]}_{\text{Dobro da frequência $f_c$}} \text{ .}
 \end{equation}
 
-A \autoref{fig:iq_demodulation} ilustra o processo de demodulação dos canais \gls{cI} e \gls{cQ}, onde os sinais multiplicados por \gls{xi} e \gls{yq} são apresentados no espectro, mostrando a presença dos sinais em banda base e as componentes de alta frequência resultantes da multiplicação com as portadoras (considerando um $f_c = 2 \text{\gls{khz}}$). \cite{cnes_services_and_message_formats_ed2_rev2_2006}
 
-\begin{figure}[H]
-	\centering
-	\caption{Componentes $I$ e $Q$ após demodulação}\label{fig:iq_demodulation}
-	\includegraphics[width=\linewidth]{assets/cap2/receiver_demodulator_freq.pdf}
-    \fonteproprioautor
-\end{figure}
-
-
-\subsection{Filtragem passa baixa}\label{sec:filtering}
+\subsection{Filtragem}\label{sec:filtering}
 
 Para isolar os sinais em banda base \gls{dIprime} e \gls{dQprime}, é necessário aplicar um \gls{LPF}, com frequência de corte de $720$ \gls{hz}, com resposta ao impulso \gls{ht}, que remove as componentes de alta frequência em $2 \cdot \text{\gls{fc}}$ resultantes da multiplicação de demodulação realizada anteriormente \cite{rodrigues_demodulador_2018}.
 
@@ -634,39 +601,48 @@ Os polos e zeros do filtro Butterworth também podem ser calculados com base na 
     \fonteproprioautor
 \end{figure}
 
-A \autoref{fig:lowpassfilter} apresenta o espectro dos sinais \gls{dXprime} e \gls{dYprime} antes e após a filtragem passa-baixa, bem como a resposta em frequência \gls{Hf} do filtro, onde é possível observar a remoção das componentes de alta frequência, deixando apenas os sinais em banda base, além da frequência de corte do filtro (onde a atenuação alcança $-3$ \gls{db}).
+Após o processo de filtragem passa-baixa com o \gls{LPF}, os sinais \gls{dIprime} e \gls{dQprime} em banda base passam por um filtro casado ou \gls{MF}. O \gls{MF} é utilizado para maximizar a relação sinal-ruído (\gls{SNR}) de cada canal, melhorando a detecção dos símbolos transmitidos \cite{10555531840}. O sinal antes da filtragem casada pode se definido como uma soma do sinal transmitido com ruído adicionado, conforme
 
-\begin{figure}[H]
-	\centering
-	\caption{Componentes $I$ $Q$ após filtragem passa baixa}\label{fig:lowpassfilter}
-	\includegraphics[width=\linewidth]{assets/cap2/receiver_lpf_freq.pdf}
-    \fonteproprioautor
-\end{figure}
+\vspace{-1em}
+\begin{equation}
+    d_I(t) = s_I(t) + n(t) \text{ , } d_Q(t) = s_Q(t) + n(t) \text{ ,}
+\end{equation}
 
-\subsection{Filtragem casada}
+\noindent onde $n(t)$ é o ruído \gls{AWGN} adicionado ao sinal transmitido. Como queremos maximizar a \gls{SNR} no instante de decisão, o pulso do filtro casado \gls{gt} deve ser definido como inverso no tempo do pulso utilizado na modulação de pulso (conforme apresentado na seção \ref{sec:pulse_modulation}), ou seja 
 
-Os sinais \gls{dIprime} e \gls{dQprime} em banda base, e já filtrados por um \gls{LPF}, passam por um filtro casado \gls{MF}, que é utilizado para maximizar a relação sinal-ruído (\gls{SNR}). O filtro casado é ajustado para coincidir com o inverso do pulso  \gls{gti} utilizado na formatação do sinal na transmissão \cite{10555531840}. 
+\vspace{-1em}
+\begin{equation}
+    g_{\text{MF}}(t) = g(-t) \text{ ,}
+\end{equation}
 
-O filtro casado é aplicado aos sinais \gls{dIprime} e \gls{dQprime} através da expressão
+Onde \gls{gt} é o pulso utilizado na modulação de pulso de cada canal. Essa escolha se deve ao fato de que a convolução do sinal recebido com o pulso inverso no tempo do pulso de transmissão resulta em uma maximização da \gls{SNR} no instante de decisão, conforme demonstrado na teoria de detecção de sinais em presença de ruído \cite{10555531840}. A \gls{SNR} do sinal pode ser expressa como
+
+\vspace{-1em}
+\begin{equation}
+    \bigg(\frac{S}{N}\bigg)_{\!T} =
+    \frac{\bigg|\displaystyle\int_{-\infty}^{\infty} S(f)\, G(f)\, e^{-j2\pi f t}\, df\bigg|^2}
+    {\dfrac{N_0}{2} \cdot \displaystyle\int_{-\infty}^{\infty} |G(f)|^2\, df} \text{ ,}
+\end{equation}
+
+
+\noindent onde $S(f)$ é a transformada de Fourier do sinal transmitido, $G(f)$ é a transformada de Fourier do pulso do filtro casado, $N_0$ é a densidade espectral de potência do ruído. Para encontrar  a máxima \gls{SNR}, deve-se encontrar o pulso $G(f)$ que maximize a expressão acima, o que é alcançado quando $G(f)$ é proporcional ao conjugado complexo de $S(f)$, ou seja, quando o pulso do filtro casado é o inverso no tempo do pulso de transmissão \cite{10555531840}, conforme 
+
+\vspace{-1em}
+\begin{equation}
+    G(f) = k \cdot S^*(f) e^{-j2\pi f t} \mapsto g(t) = k \cdot s^*(-t) \text{ ,}
+\end{equation}
+
+\noindent onde $k$ é uma constante de proporcionalidade. Assim, a aplicação do filtro casado aos sinais \gls{dXprime} e \gls{dYprime} pode ser expressa como
 
 \vspace{-1em}
 \begin{equation}
     \begin{array}{c@{\quad\text{e}\quad}c}
-        I'(t) = d_I(t) * g(-t) &
-        Q'(t) = d_Q(t) * g(-t)
-    \end{array} \text{ .}
+        d_I''(t) = d_I'(t) * g_{\text{MF}}(t) &
+        d_Q''(t) = d_Q'(t) * g_{\text{MF}}(t)
+    \end{array} \text{ ,}
 \end{equation}
 
-
-A \autoref{fig:matchedfilter} apresenta o espectro dos sinais \gls{Iprime} e \gls{Qprime} após a filtragem casada, onde é possível observar a melhoria na relação sinal-ruído e a remoção de componentes indesejadas. 
-
-\begin{figure}[H]
-	\centering
-	\caption{Componentes $I$ e $Q$ após filtragem casada}\label{fig:matchedfilter}
-	\includegraphics[width=\linewidth]{assets/cap2/example_mf_freq_comp.pdf}
-    \fonteproprioautor
-\end{figure}
-
+Esse processo resulta em uma saída que acumula corretamente a energia do símbolo transmitido, pois está correlacionado com o pulso original \gls{gt}, enquanto que o ruído, que é aleatório e não correlacionado com o pulso, não se acumula da mesma forma, resultando em uma atenuação do ruído em comparação com o sinal. Dessa forma, aumentando a \gls{SNR} e melhorando a detecção dos símbolos transmitidos \cite{10555531840}.
 
 \subsection{Decisão de símbolos}
 
@@ -679,15 +655,16 @@ Uma vez com os sinais \gls{dXprime} e \gls{dYprime} filtrados, considerando sinc
     \end{array} \text{ ,}
 \end{equation}
 
-\noindent onde \gls{n} é o índice de amostra, \gls{Tb} é o tempo de bit $1/R_b$ e \gls{tau} é o atraso inicial da decisão. A \autoref{fig:sampling} apresenta os sinais amostrados \gls{Inprime} e \gls{Qnprime}. 
+\noindent onde \gls{n} é o índice de amostra, \gls{Tb} é o tempo de bit $1/R_b$ e \gls{tau} é o atraso inicial da decisão. 
+% A \autoref{fig:sampling} apresenta os sinais amostrados \gls{Inprime} e \gls{Qnprime}. 
 
-\begin{figure}[H]
-	\centering
-	\caption{Amostragem das componentes $I$ e $Q$}\label{fig:sampling}
-	\includegraphics[width=\linewidth]{assets/cap2/example_sampler_time.pdf}
+% \begin{figure}[H]
+% 	\centering
+% 	\caption{Amostragem das componentes $I$ e $Q$}\label{fig:sampling}
+% 	\includegraphics[width=\linewidth]{assets/cap2/example_sampler_time.pdf}
     
-    \fonteproprioautor
-\end{figure}
+%     \fonteproprioautor
+% \end{figure}
 
 Os valores amostrados \gls{Inprime} e \gls{Qnprime} são então decididos, isto é, quantizados para valores discretos, correspondendo aos símbolos transmitidos. O mapeamento dos pares pode ser expressado como
 
@@ -703,14 +680,16 @@ Os valores amostrados \gls{Inprime} e \gls{Qnprime} são então decididos, isto 
     \end{cases} \text{ ,}
 \end{equation}
 
-\noindent onde \gls{Inprime} e \gls{Qnprime} são os vetores símbolo. A \autoref{fig:comparacao_bits} apresenta os símbolos decididos nos vetores \gls{Inprime} e \gls{Qnprime} após o processo de quantização, em comparação com os vetores originais \gls{In} e \gls{Qn} transmitidos.
+\noindent onde \gls{Inprime} e \gls{Qnprime} são os vetores símbolo. 
 
-\begin{figure}[H]
-	\centering
-	\caption{Comparação dos vetores $I$ e $Q$ decididos com vetores transmitidos}\label{fig:comparacao_bits}
-	\includegraphics[width=\linewidth]{assets/cap2/example_sampler_symbols.pdf}
-    \fonteproprioautor
-\end{figure}
+% A \autoref{fig:comparacao_bits} apresenta os símbolos decididos nos vetores \gls{Inprime} e \gls{Qnprime} após o processo de quantização, em comparação com os vetores originais \gls{In} e \gls{Qn} transmitidos.
+
+% \begin{figure}[H]
+% 	\centering
+% 	\caption{Comparação dos vetores $I$ e $Q$ decididos com vetores transmitidos}\label{fig:comparacao_bits}
+% 	\includegraphics[width=\linewidth]{assets/cap2/example_sampler_symbols.pdf}
+%     \fonteproprioautor
+% \end{figure}
 
 \subsection{Decodificador de linha}
 
