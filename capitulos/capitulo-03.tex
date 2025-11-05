@@ -163,18 +163,20 @@ Após a modulação do sinal \gls{st} em banda passante, o próximo passo é a t
 
 \subsection{Modelo de canal}\label{sec:modelo_canal}
 
-O modelo de canal é instânciado com base na \gls{fs} e na duração desejada para o canal, padrão $1$ segundo. A partir disto, é possível calcular a quantidade de amostras necessárias para compor o canal, e então criar um vetor de zeros com o tamanho adequado, que servirá como base para a adição das transmissões. O modelo de canal é ilustrado na \autoref{fig:channel_time}.
+O modelo de canal é instânciado com base na \gls{fs} e na duração desejada para o canal, padrão $1$ segundo. A partir disto, é possível calcular a quantidade de amostras necessárias para compor o canal, e então criar um vetor de zeros com o tamanho adequado, que servirá como base para a adição das transmissões. 
 
-\begin{figure}[H]
-	\centering
-	\caption{Adição de múltiplas transmissões no canal}\label{fig:channel_time}
-	\includegraphics[width=\linewidth]{assets/cap3/example_channel_time_subchannels.pdf}
-    \fonteproprioautor
-\end{figure}
+% O modelo de canal é ilustrado na \autoref{fig:channel_time}.
+
+% \begin{figure}[H]
+% 	\centering
+% 	\caption{Adição de múltiplas transmissões no canal}\label{fig:channel_time}
+% 	\includegraphics[width=\linewidth]{assets/cap3/example_channel_time_subchannels.pdf}
+%     \fonteproprioautor
+% \end{figure}
 
 Em seguida, cada transmissão é adicionada ao canal junto a fator de posição desejado, fator que pode variar entre $0$ e $1$, onde $0$ representa o início do canal e $1$ representa o final do canal. A posição de cada transmissão é calculada com base no fator de posição e na quantidade total de amostras do canal. 
 
-\subsection{Geração de ruído AWGN}\label{sec:geracao_ruido}
+% \subsection{Geração de ruído AWGN}\label{sec:geracao_ruido}
 
 Uma vez com as transmissões adicionadas ao canal, o próximo passo é a geração do ruído \gls{AWGN} com base na \gls{SNR} ou \gls{EbN0} desejada. O ruído é gerado como um vetor de números aleatórios com distribuição normal, com média zero e variância calculada com base no tipo de ruído utilizado e na potência do sinal transmitido. O calculo da \gls{sigma2} utilizada na geração do ruído \gls{SNR} pode ser expresso como
 
@@ -312,18 +314,20 @@ O primeiro passo na cadeia de recepção é a demodulação do sinal recebido \g
 \begin{figure}[H]
 	\centering
 	\caption{Componentes $I$ e $Q$ após demodulação}\label{fig:receiver_demodulator}
-	\includegraphics[width=\linewidth]{assets/cap2/receiver_demodulator_freq.pdf}
+	\includegraphics[width=\linewidth]{assets/cap3/receiver_demodulator_freq.pdf}
     \fonteproprioautor
 \end{figure}
 
 \subsection{Filtragem}\label{sec:filtragem}
 
-Após a demodulação, o próximo passo é a filtragem dos canais \gls{cI} e \gls{cQ} para remover as componentes de alta frequência geradas no processo de demodulação, bem como reduzir o máximo possível ruído presente em cada canal. A filtragem é realizada em duas etapas, primeiramente uma filtragem passa baixa para remover as componentes de alta frequência, conforme detalhado na seção \ref{sec:filtering}. A \autoref{fig:lowpassfilter} apresenta o espectro dos sinais \gls{dXprime} e \gls{dYprime} antes e após a filtragem passa-baixa, bem como a resposta em frequência \gls{Hf} do filtro, onde é possível observar a remoção das componentes de alta frequência, deixando apenas os sinais em banda base, além da frequência de corte do filtro (onde a atenuação alcança $-3$ \gls{db}).
+Após a demodulação, o próximo passo é a filtragem dos canais \gls{cI} e \gls{cQ} para remover as componentes de alta frequência geradas no processo de demodulação, bem como reduzir o máximo possível ruído presente em cada canal. A filtragem é realizada em duas etapas, primeiramente uma filtragem passa baixa para remover as componentes de alta frequência, conforme detalhado na seção \ref{sec:filtering}. 
+
+A \autoref{fig:lowpassfilter} apresenta o espectro dos sinais \gls{dXprime} e \gls{dYprime} antes e após a filtragem passa-baixa, bem como a resposta em frequência \gls{Hf} do filtro, onde é possível observar a remoção das componentes de alta frequência, deixando apenas os sinais em banda base, além da frequência de corte do filtro (onde a atenuação alcança $-3$ \gls{db}).
 
 \begin{figure}[H]
 	\centering
 	\caption{Componentes $I$ $Q$ após filtragem passa baixa}\label{fig:lowpassfilter}
-	\includegraphics[width=\linewidth]{assets/cap2/receiver_lpf_freq.pdf}
+	\includegraphics[width=\linewidth]{assets/cap3/receiver_lpf_freq.pdf}
     \fonteproprioautor
 \end{figure}
 
@@ -332,7 +336,7 @@ Em seguida, os sinais \gls{dIprime} e \gls{dQprime} já filtrados são submetido
 \begin{figure}[H]
 	\centering
 	\caption{Filtragem casada dos canais $I$ e $Q$}\label{fig:receiver_matchedfilter}
-	\includegraphics[width=\linewidth]{assets/cap3/receiver_mf_time.pdf}
+	\includegraphics[width=\linewidth]{assets/cap3/receiver_mf_freq.pdf}
     \fonteproprioautor
 \end{figure}
 

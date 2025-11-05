@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2034.24" height="630.24" version="1.1" viewBox="0 0 2034.24 630.24">
+ <style>
+          .fill { fill: black; }
+          .stroke { stroke: black; }
+          @media (prefers-color-scheme: dark) {
+            .fill { fill: white; }
+            .stroke { stroke: white; }
+          }
+        </style><defs>
+  <clipPath id="a">
+   <path transform="scale(.48)" d="M78.125 21.875H4162.5V1290.625H78.125Z" clip-rule="evenodd" />
+  </clipPath>
+ </defs>
+ <g clip-path="url(#a)">
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="M-1320-1160H90V-725H-1320Z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="24" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-713.0156 -695.6876 -683.6876 -670.3436 -658.3436 -649.0076 -643.0076 -629.66366 -619.0076 -613.0076 -601.0076 -587.66366 -580.99166 -574.31967 -563.66366 -551.66366 -541.0076 -529.0076" y="-1131" class="fill">Dados de aplica&#231;&#227;o</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-960-1100h240v320h-240z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="20" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-911.40628 -898.0662 -892.5062 -882.5062 -873.6262 -863.6262 -858.6262 -847.5062 -838.6262 -833.6262 -822.5062 -812.5062 -801.3862 -791.3862 -783.6062 -778.6062" y="-1050" class="fill">Bloco de dados 1</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-1295-1100h240v260h-240z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="20" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-1246.4063 -1233.0663 -1227.5062 -1217.5062 -1208.6262 -1198.6262 -1193.6262 -1182.5062 -1173.6262 -1168.6262 -1157.5062 -1147.5062 -1136.3862 -1126.3862 -1118.6062 -1113.6062" y="-1050" class="fill">Bloco de dados 0</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-1285-1020h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-1239.8281 -1226.8322 -1221.8281 -1214.1641 -1206.1721 -1198.1802 -1189.1802 -1180.1802 -1175.6802 -1165.6721 -1156.6721 -1152.1721 -1143.1721 -1135.1802 -1125.1721 -1119.1781" y="-994" class="fill">Dire&#231;&#227;o do vento</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-1285-960h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-1222.8281 -1211.8301 -1204.169 -1196.177 -1188.185 -1183.181 -1173.173 -1168.169 -1162.1749 -1153.1749 -1145.183 -1136.183" y="-934" class="fill">Precipita&#231;&#227;o</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-1285-900h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-1251.5625 -1240.5645 -1232.9033 -1224.9114 -1217.9094 -1210.9075 -1201.9075 -1192.9075 -1188.4075 -1179.4075 -1173.4135 -1158.4194 -1149.4194 -1142.4175 -1136.4235 -1128.4315 -1120.4396 -1115.4356 -1107.4436" y="-874" class="fill">Press&#227;o atmosf&#233;rica</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-950-1020h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-914.6719 -904.31838 -896.32638 -881.33236 -871.32437 -863.33236 -855.34036 -846.34036 -840.3463 -830.3383 -822.3463 -813.3463 -808.8463 -798.8383 -789.8383 -786.334 -773.338" y="-994" class="fill">Temperatura do Ar</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-950-960h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-909.25 -896.254 -881.26 -876.256 -866.248 -857.248 -847.24 -839.248 -834.748 -821.752 -813.76 -808.756 -799.756 -793.76199 -788.75796 -779.75796" y="-934" class="fill">Umidade Relativa</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-950-900h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-917.6875 -906.3408 -898.3488 -893.3448 -884.3448 -876.3528 -871.34878 -861.34078 -852.34078 -842.33279 -834.34078 -829.84078 -819.83279 -810.83279 -806.66409 -795.3174 -787.3254 -777.3174 -771.32339" y="-874" class="fill">Velocidade do Vento</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-950-840h220v50h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-944.8594 -931.8634 -922.8634 -912.8554 -907.8514 -898.8514 -890.8594 -881.8594 -872.8594 -868.3594 -858.3514 -849.3514 -844.34738 -835.34738 -827.6836 -824.17678 -811.1808 -803.1888 -793.1808 -778.18679 -768.1788 -763.17477 -754.17477 -744.16677" y="-809" class="fill">R&#225;dia&#231;&#227;o Solar Acumulada</tspan></text>
+  <text transform="matrix(0 1.3854643 -1.3854643 0 -888.56027 1689.1045)" font-family="Tinos" font-size="20" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-1048.0625 -1038.0625 -1028.0625 -1023.0625 -1011.9425 -1006.3825 -999.72256" y="-962" class="fill">24 bits</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-1040-840v-260" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-1044-840h8" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-1036-1100h-8" fill="none" stroke-miterlimit="10" class="stroke" />
+  <text transform="matrix(0 1.3854643 -1.3854643 0 -375.93849 1259.6106)" font-family="Tinos" font-size="20" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-708.0625 -698.0625 -688.0625 -683.0625 -671.9425 -666.3825 -659.72256" y="-932" class="fill">32 bits</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-700-780v-320" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-704-780h8" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-696-1100h-8" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-640-1100h240v320h-240z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="20" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-591.40628 -578.0662 -572.5062 -562.5062 -553.6262 -543.6262 -538.6262 -527.5062 -518.6262 -513.6262 -502.50624 -492.50624 -481.38624 -471.38624 -463.60624 -458.60624" y="-1050" class="fill">Bloco de dados 2</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-630-1020h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-569.3594 -559.09939 -549.0914 -541.09939 -531.0914 -524.08938 -515.08938 -507.42286 -502.92286" y="-994" class="fill">&lt;Sensor X</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-489.92189" y="-994" class="fill">2</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-480.92189" y="-994" class="fill">&gt;</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-630-960h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-569.03128 -558.77127 -548.76327 -540.77127 -530.76327 -523.7612 -514.7612 -507.09474 -503.2627" y="-934" class="fill">&lt;Sensor Y</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-490.25" y="-934" class="fill">2</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-481.25" y="-934" class="fill">&gt;</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-630-900h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-568.8594 -558.59939 -548.5914 -540.59939 -530.5914 -523.58938 -514.58938 -506.92286 -502.42286" y="-874" class="fill">&lt;Sensor Z</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-490.40626" y="-874" class="fill">2</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-481.40626" y="-874" class="fill">&gt;</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-630-840h220v50h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-571.7031 -561.4431 -551.4351 -543.4431 -533.4351 -526.4331 -517.4331 -509.7666 -505.5918" y="-809" class="fill">&lt;Sensor W</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-487.57814" y="-809" class="fill">2</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-478.57814" y="-809" class="fill">&gt;</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-304.99345-941.08999 0.99991 0.01312-0.01312 0.99988-0.99991-0.01311m4.01279-0.94746 0.9999 0.01316-0.01312 0.99984-0.9999-0.01312m4.01275-0.94742 0.99995 0.0131-0.01313 0.9999-0.99994-0.0131m4.01278-0.9474 0.99991 0.01302-0.01312 0.99988-0.9999-0.01306m4.0128-0.94744 0.9999 0.01311-0.01314 0.99989-0.9999-0.0131m4.01278-0.94748 0.99991 0.01312-0.01312 0.99988-0.99991-0.01312m4.01278-0.9474 0.99991 0.0131-0.01311 0.9999-0.99995-0.01318m4.01279-0.94738 0.99991 0.01306-0.01312 0.9999-0.99991-0.01309m4.01278-0.94741 0.99991 0.0131-0.01311 0.9999-0.9999-0.01316m4.01277-0.94744 0.99993 0.01312-0.01315 0.99988-0.9999-0.0131m4.01275-0.94748 0.99991 0.01318-0.01311 0.99982-0.9999-0.01312m4.01277-0.9474 0.99993 0.0131-0.01315 0.9999-0.99991-0.01317" />
+  <text transform="matrix(0 1.3854643 -1.3854643 0 67.41005 816.262)" font-family="Tinos" font-size="20" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-388.0625 -378.0625 -368.0625 -363.0625 -351.9425 -346.3825 -339.7225" y="-932" class="fill">32 bits</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-380-780v-320" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-384-780h8" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-376-1100h-8" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-222-1100h240v320h-240z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="20" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-173.96875 -160.62876 -155.06876 -145.06876 -136.18875 -126.18875 -121.18875 -110.06875 -101.18875 -96.18875 -85.06875 -75.06875 -63.948747 -53.948747 -46.168748 -41.168748" y="-1050" class="fill">Bloco de dados n</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-212-1020h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-151.03125 -140.77126 -130.76326 -122.771259 -112.76325 -105.76125 -96.76125 -89.09473 -84.59473" y="-996" class="fill">&lt;Sensor X</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="15" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-71.59375" y="-991.40628" class="fill">n</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-63.25" y="-996" class="fill">&gt;</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-212-960h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-150.70313 -140.44313 -130.43514 -122.44313 -112.43513 -105.43313 -96.43313 -88.7666 -84.93457" y="-936" class="fill">&lt;Sensor Y</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="15" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-71.921878" y="-931.40628" class="fill">n</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-63.578126" y="-936" class="fill">&gt;</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-212-900h220v40h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-150.53125 -140.27126 -130.26326 -122.271259 -112.26325 -105.26125 -96.26125 -88.59473 -84.09473" y="-876" class="fill">&lt;Sensor Z</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="15" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-72.078128" y="-871.40628" class="fill">n</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-63.734376" y="-876" class="fill">&gt;</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m-212-840h220v50h-220z" fill="none" class="stroke" />
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-153.375 -143.115 -133.10701 -125.115009 -115.107 -108.105 -99.105 -91.43848 -87.26367" y="-811" class="fill">&lt;Sensor W</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="15" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-69.25" y="-806.40628" class="fill">n</tspan></text>
+  <text transform="matrix(1.3854643 0 0 1.3854643 1868.5137 1619.8313)" font-family="Tinos" font-size="18" font-weight="bold" xml:space="preserve" class="fill"><tspan x="-60.90625" y="-811" class="fill">&gt;</tspan></text>
+  <text transform="matrix(0 1.3854643 -1.3854643 0 646.53408 237.13794)" font-family="Tinos" font-size="20" font-weight="bold" xml:space="preserve" class="fill"><tspan x="29.9375 39.9375 49.9375 54.9375 66.0575 71.6175 78.2775" y="-932" class="fill">32 bits</tspan></text>
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m38-780v-320" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m34-780h8" fill="none" stroke-miterlimit="10" class="stroke" />
+  <path transform="matrix(1.3854643,0,0,1.3854643,1869.2063,1620.524)" d="m42-1100h-8" fill="none" stroke-miterlimit="10" class="stroke" />
+ </g>
+</svg>
