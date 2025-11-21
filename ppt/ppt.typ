@@ -25,7 +25,7 @@
 
 == Objetivo Geral
 
-Desenvolver um simulador de transmissão e recepção de sinais seguindo o padrão PTT-A3 (Platform Transmitter Terminal) para aplicações no sistema de satélites ARGOS-3, com o intuito de auxiliar na análise e validação do desempenho do sistema.
+Desenvolver um simulador de transmissão e recepção de sinais seguindo o padrão PTT-A3 (Platform Transmitter Terminal) para aplicações no sistema de satélites ARGOS-3 (Advanced Research and Global Observation Satellite), com o intuito de auxiliar na análise e validação do desempenho do sistema.
 
 - Estudar o padrão de comunicação ARGOS; 
 - Simular a cadeia de transmissão do sistema PTT-A3;
@@ -163,19 +163,7 @@ As ETRs são responsáveis por receber os sinais retransmitidos pelos satélites
     ),
 )
 
-// == Retransmissão PCD -> Satélite -> ETR
-
-// #align(horizon+center)[
-// #figure(
-//   figure(
-//     image("./assets/retransmissao.svg", width: 100%),
-//     numbering: none,
-//     caption: figure.caption([], position: top)
-//   ),
-// )
-// ]
-
-== Payload de Aplicação
+== Payload de aplicação
 
 O payload de aplicação do ARGOS-3 é composto por diversos campos que armazenam informações essenciais para a correta interpretação dos dados transmitidos pelas PCDs.
 
@@ -202,6 +190,7 @@ O campo de identificação da PCD é crucial para garantir que os dados recebido
   ),
 )
 ]
+
 
 == Comprimento de mensagem
 
@@ -231,7 +220,7 @@ O padrão ARGOS-3 possui um formato específico de datagrama para a transmissão
 )
 ]
 
-== Quadro Transmitido
+== Quadro transmitido
 
 O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portadora pura, preâmbulo e datagrama, conforme apresentado a seguir.
 
@@ -254,7 +243,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/transmissor.svg", width: 100%),
     numbering: none,
-    caption: figure.caption([Diagrama de blocos do Transmissor], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -267,7 +256,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/transmitter_datagram_time.svg", width: 100%),
     numbering: none,
-    caption: figure.caption([Sequência $u[n]$ do datagrama], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -279,7 +268,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/conv_coding.svg", width: 90%),
     numbering: none,
-    caption: figure.caption([Diagrama de blocos - Codificador convolucional], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -291,7 +280,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/scrambler.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Diagrama de blocos - Embaralhador], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -303,7 +292,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/transmitter_mux_time.svg", width: 100%),
     numbering: none,
-    caption: figure.caption([Multiplexação - preâmbulo com sequência embaralhada], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -316,11 +305,10 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/transmitter_formatter_time.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Formatação dos simbolos para transmissão], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
-
 
 == Modulação de pulso (domínio da frequência)
 
@@ -329,7 +317,19 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/transmitter_formatter_freq.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Formatação dos simbolos para transmissão], position: top)
+    caption: figure.caption([], position: top)
+  ),
+)
+]
+
+== Modulação de pulso (RRC vs Rect)
+
+#align(horizon+center)[
+#figure(
+  figure(
+    image("./assets/example_formatter_comp.svg", width: 90%),
+    numbering: none,
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -341,7 +341,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/modulador.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Diagrama de blocos do modulador QPSK], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -354,7 +354,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/transmitter_modulator_time.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Modulação do sinal em banda passante], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -367,7 +367,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/transmitter_modulator_portadora.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Período de portadora pura - comparação do domínio da frequência], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -379,7 +379,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/receptor1.svg", width: 100%),
     numbering: none,
-    caption: figure.caption([Diagrama de blocos do receptor], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ] 
@@ -391,7 +391,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/detector.svg", width: 100%),
     numbering: none,
-    caption: figure.caption([Diagrama de blocos - Detector de portadora], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -403,44 +403,44 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/example_detector_freq.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Detecção de portadora - domínio da frequência], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
 
-== Diagrama de Waterfall do sinal recebido
+== Diagrama de Waterfall
 
 #align(horizon+center)[
 #figure(
   figure(
     image("./assets/example_detector_waterfall.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Diagrama de Waterfall - tempo vs frequência], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
 
-== Diagrama de Waterfall detecção
+== Diagrama de Waterfall
 
 #align(horizon+center)[
 #figure(
   figure(
     image("./assets/example_detector_waterfall_detection.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Diagrama de Waterfall - detecção], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
 
 
-== Diagrama de Waterfall decisão
+== Diagrama de Waterfall
 
 #align(horizon+center)[
 #figure(
   figure(
     image("./assets/example_detector_waterfall_decision.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Diagrama de waterfall - decisão], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -452,7 +452,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/receiver_demodulator_freq.svg", width: 90%),
     numbering: none,
-    caption: figure.caption([Demodulação do segmento de sinal para banda base], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -464,7 +464,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/receiver_lpf_freq.svg", width: 90%),
     numbering: none,
-    caption: figure.caption([Filtragem passa baixa - domínio da frequência], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -476,7 +476,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/receiver_mf_freq.svg", width: 90%),
     numbering: none,
-    caption: figure.caption([Filtragem casada - domínio da frequência], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -488,7 +488,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/sync.svg", width: 100%),
     numbering: none,
-    caption: figure.caption([Diagrama de blocos - sincronizador], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -500,7 +500,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/example_synchronizer_word.svg", width: 90%),
     numbering: none,
-    caption: figure.caption([Vetor de sincronismo (vetor esperado)], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -512,7 +512,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/receiver_sync_corr.svg", width: 100%),
     numbering: none,
-    caption: figure.caption([Correlação sinal esperado vs recebido], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -524,7 +524,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/receiver_sync_time.svg", width: 90%),
     numbering: none,
-    caption: figure.caption([Momento de sincronização $tau$ no sinal recebido], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -536,7 +536,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/receiver_sampler_time.svg", width: 90%),
     numbering: none,
-    caption: figure.caption([Amostragem do sinal recebido - domínio do tempo], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -548,7 +548,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/receiver_sampler_const.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Amostragem do sinal recebido - plano IQ], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -561,21 +561,21 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
   figure(
     image("./assets/receptor2.svg", width: 100%),
     numbering: none,
-    caption: figure.caption([Diagrama de blocos receptor - após amostragem], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
 
 = Resultados 
 
-== BER Vs SNR
+== Taxa de Erro de Bit (BER) vs Relação Sinal-Ruído (SNR)
 
 #align(horizon+center)[
 #figure(
   figure(
     image("./assets/ber_vs_ebn0.svg", width: 80%),
     numbering: none,
-    caption: figure.caption([Taxa de Erro de Bit (BER) vs. Relação Sinal-Ruído (SNR)], position: top)
+    caption: figure.caption([], position: top)
   ),
 )
 ]
@@ -604,7 +604,7 @@ O quadro transmitido no padrão ARGOS-3, inclui três campos, sendo eles: portad
 ]
 
 
-= Referências: 
+= Referências
 
 == Referências
 

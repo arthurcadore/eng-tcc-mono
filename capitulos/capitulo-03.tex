@@ -25,14 +25,8 @@ O primeiro passo na cadeia de transmissão é a geração da sequência de bits 
     \fonteproprioautor
 \end{figure}
 
-Após a montagem dos bits \gls{ut} do datagrama, os mesmos são codificados utilizando codificação convolucional, conforme detalhado na seção \ref{sec:conv_coding}, resultando nos vetores de bits \gls{vt0} e \gls{vt1}, esses vetores então, são embaralhados resultando nas sequências \gls{Xn} e \gls{Yn} para os canais \gls{cI} e \gls{cQ}, respectivamente. O processo de codificação convolucional aplicado no vetor \gls{ut} é ilustrado na \autoref{fig:transmitter_conv_time}.
+Após a montagem dos bits \gls{ut} do datagrama, os mesmos são codificados utilizando codificação convolucional, conforme detalhado na seção \ref{sec:conv_coding}, resultando nos vetores de bits \gls{vt0} e \gls{vt1}, esses vetores então, são embaralhados resultando nas sequências \gls{Xn} e \gls{Yn} para os canais \gls{cI} e \gls{cQ}, respectivamente. 
 
-\begin{figure}[H]
-	\centering
-	\caption{Codificação convolucional do datagrama ARGOS-3}\label{fig:transmitter_conv_time}
-	\includegraphics[width=\linewidth]{assets/cap3/transmitter_conv_time.pdf}
-    \fonteproprioautor
-\end{figure}
 
 As sequências \gls{Xn} e \gls{Yn} já embaralhadas, são então multiplexadas com o preâmbulo \gls{SIn} e \gls{SQn} dos canais \gls{cI} e \gls{cQ} respectivamente, gerados conforme apresentado na seção \ref{sec:preambulo}. A adição das sequências é fundamental para permitir a sincronização de símbolos no receptor, esse processo é ilustrado na \autoref{fig:mux_time}.
 
@@ -65,8 +59,6 @@ Após a montagem das sequências de símbolos \gls{In} e \gls{Qn}, o próximo pa
     \fonteproprioautor
 \end{figure}
 
-\subsubsection{Pulso RRC e Manchester}
-
 Antes de aplicar a modulação de pulso, é necessário gerar os filtros de pulso \gls{RRC} e \gls{Manchester}, que serão utilizados para modular os canais \gls{cI} e \gls{cQ}, respectivamente. A resposta ao impulso do filtro \gls{RRC} é ilustrada na \autoref{fig:impulse_response_rrc}, e é calculada conforme apresentado na seção \ref{sec:pulse_modulation}. 
 
 \begin{figure}[H]
@@ -98,8 +90,6 @@ W_{MAN} = 2 \cdot \frac{1 + \alpha}{T_b}
 \end{figure}
 
 A utilização do pulso \gls{Manchester} no canal \gls{cQ} ao invés da codificação de linha \gls{Manchester} proposta originalmente tem como objetivo simplificar a implementação do sistema, reduzindo a complexidade computacional e o número de etapas necessárias na cadeia de transmissão. 
-
-\subsubsection{Modulação de pulso dos canais I e Q}
 
 Uma vez com os filtros de pulso \gls{RRC} e \gls{Manchester} gerados, é possível aplicar a modulação de pulso nos canais \gls{cI} e \gls{cQ}, respectivamente gerando os sinais \gls{dI} e \gls{dQ} modulados em banda base. Esse processo envolve a superamostragem dos vetores de símbolos \gls{In} e \gls{Qn}, em função da frequência de amostragem \gls{fs}, seguida da filtragem com os respectivos filtros de pulso. 
 
@@ -136,7 +126,7 @@ A partir do sinal modulado \gls{st}, é possível observar a constelação do si
 \end{figure}
 
 
-\subsubsection{Adição de portadora pura}
+\subsection{Adição de portadora pura}
 
 Ao se observar as figuras \ref{fig:transmitter_modulator_time} e \ref{fig:transmitter_formatter_time} pode-se notar que no inicio da transmissão, a componente \gls{dI} está com amplitude estável e proxima á $`1`$, enquanto que a componente \gls{dQ} está estável com amplitude igual a $`0`$, essa é configuração é proposital dentro do \gls{Pd} para que a sequência resultante modulada em banda passante tenha um periodo de fase estável, ou seja, uma portadora pura, antes do inicio da transmissão dos dados. O equacionamento para o período de portadora pura pode ser expresso como
 
@@ -163,7 +153,7 @@ Após a modulação do sinal \gls{st} em banda passante, o próximo passo é a t
 
 \subsection{Modelo de canal}\label{sec:modelo_canal}
 
-O modelo de canal é instânciado com base na \gls{fs} e na duração desejada para o canal, padrão $1$ segundo. A partir disto, é possível calcular a quantidade de amostras necessárias para compor o canal, e então criar um vetor de zeros com o tamanho adequado, que servirá como base para a adição das transmissões. 
+O modelo de canal é criado com base na \gls{fs} e na duração desejada para o canal, padrão $1$ segundo implementado na biblioteca. A partir disto, é possível calcular a quantidade de amostras necessárias para compor o canal, e então criar um vetor de zeros com o tamanho adequado, que servirá como base para a adição das transmissões. 
 
 % O modelo de canal é ilustrado na \autoref{fig:channel_time}.
 

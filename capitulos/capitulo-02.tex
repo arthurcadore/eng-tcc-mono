@@ -91,7 +91,7 @@ A estrutura de um quadro \gls{PTT-A3} é composta por três campos principais, s
 
 \subsection{Portadora pura}
 
-A sequência de transmissão do quadro inicia-se com a portadora contínua ou pura, com duração de 82 ± 2 ms. Durante essa etapa a portadora não transmite dados modulados e é utilizada pelo receptor apenas para realizar a detecção do sinal, bem como para facilitar o processo de sincronização de frequência e fase da portadora. 
+A sequência de transmissão do quadro inicia-se com a portadora contínua ou pura, com duração entre 80 e 82 ms. Durante essa etapa a portadora não transmite dados modulados e é utilizada pelo receptor apenas para realizar a detecção do sinal, bem como para facilitar o processo de sincronização de frequência e fase da portadora. 
 
 A \autoref{fig:portadora_pura_freq} apresenta o sinal da portadora pura no espectro em comparação com o sinal modulado. Nota-se que quando apenas a portadora pura é transmitida, o espectro do sinal é concentrado em uma única frequência, sem componentes laterais. Já o sinal modulado apresenta componentes laterais que se estendem ao redor da frequência da portadora \gls{fc}, formando uma banda de uso do espectro mais ampla \cite{cnes_services_and_message_formats_ed2_rev2_2006}.
 
@@ -207,10 +207,10 @@ O campo de tamanho de mensagem \gls{Tm} é utilizado para informar ao receptor q
         \midrule
         1 & 24  & 000 & 0 & 0000\\
         2 & 56  & 001 & 1 & 0011\\
-        3 & 88  & 010 & 0 & 0100\\
-        4 & 120 & 011 & 1 & 0111\\
-        5 & 152 & 100 & 0 & 1000\\
-        6 & 184 & 101 & 1 & 1011\\
+        3 & 88  & 010 & 1 & 0100\\
+        4 & 120 & 011 & 0 & 0111\\
+        5 & 152 & 100 & 1 & 1000\\
+        6 & 184 & 101 & 0 & 1011\\
         7 & 216 & 110 & 0 & 1100\\
         8 & 248 & 111 & 1 & 1111\\
         \bottomrule
@@ -516,7 +516,7 @@ A partir das amostras de \gls{xnk}, se calcula a potência em cada componente de
 
 Em seguida, para cada índice \gls{k} do espectro calculado, é feita uma comparação com um limiar pré-definido \gls{Pt}. Caso a potência \gls{Pnk} seja maior que \gls{Pt}, a frequência é registrada pois existe a possibilidade de que uma portadora \gls{fn} esteja presente naquela frequência. 
 
-Por fim, no proximo segmento, $X_{n+1}[k]$, o sistema verifica se a frequência registrada no segmento anterior persiste, ou seja, se a potência de $k$ também é maior que o limiar \gls{Pt}, caso positivo, o sistema considera que a frequência \gls{fn} é a portadora \gls{fc} do sinal recebido e instância a cadeia de recepção passando \gls{fc} como parâmetro.
+Por fim, no proximo segmento, $X_{n+1}[k]$, o sistema verifica se a frequência registrada no segmento anterior persiste, ou seja, se a potência de $k$ também é maior que o limiar \gls{Pt}, caso positivo, o sistema considera que a frequência \gls{fn} é a portadora \gls{fc} do sinal recebido e repassa para a cadeia de recepção, utilizando \gls{fc} como parâmetro.
 
 
 
@@ -735,9 +735,19 @@ O processo de desembaralhamento retorna os vetores de bit, \gls{vt0prime} e \gls
 
 Após o desembaralhamento, os vetores \gls{vt0prime} e \gls{vt1prime} estão prontos para a decodificação convolucional para obter novamente a sequência \gls{utprime} correspondente ao vetor de bits do datagrama. O algoritmo mais popularmente utilizado para essa etapa é o algoritmo de Viterbi, que implementa a decodificação \gls{MLD} para códigos convolucionais, calculando o caminho mais provável através de \textit{Hamming Distance} para a mensagem recebida em relação à mensagem possível \cite{cnes_services_and_message_formats_ed2_rev2_2006, rodrigues_demodulador_2018}.
 
-Conforme mencionado anteriormente na \autoref{sec:conv_coding}, o padrão utilizado no \gls{ARGOS-III} é o \gls{CCSDS} 131.1-G-2, que, por sua vez, possui uma distância livre conhecida de $\text{\gls{dfree}} = 10$. Quanto maior for o valor de \gls{dfree}, maior será a robustez do código e sua capacidade de detectar e corrigir erros.
+Para realizar a decodificação convolucional, o algoritmo de Viterbi utiliza a representação do código na forma de uma treliça (\textit{trellis}), onde cada estado corresponde a uma possível configuração do registrador de deslocamento do codificador. No caso do padrão CCSDS 131.1-G-2, cujo registrador possui memória $K = 7$, o número total de estados é $2^{K-1} = 64$. Em cada instante de símbolo, apenas duas transições possíveis levam a cada estado, representando a entrada $u[n] = 0$ ou $u[n] = 1$.
 
-\noindent Assim, conforme o comparativo ilustrado na \autoref{fig:curva_bersnr} entre a transmissão \gls{QPSK} sem codificação e com codificação convolucional, o uso desta técnica na transmissão do sinal permite operar em valores de \gls{EbN0} menores em relação a não utilização do codificador, para a \gls{BER} visada pelo sistema, permitindo uso em ambientes com maior ruído para a mesma taxa de erro desejada.
+Para cada transição válida da treliça, o algoritmo calcula uma \textit{métrica de ramo}, que quantifica o grau de semelhança entre o par de bits recebido e o par esperado para aquela transição. Na decodificação \textit{Hard Viterbi}, empregada neste trabalho, essa métrica é dada pela Distância de Hamming entre os bits recebidos e os bits codificados esperados. A Distância de Hamming entre dois vetores binários $a$ e $b$ de comprimento $N$ é definida por
+
+\begin{equation}
+    d_H(a,b) = \sum_{i=1}^{N} \left| a_i - b_i \right|,
+\end{equation}
+
+onde $d_H(a,b)$ representa o número de posições em que os símbolos diferem. Essa métrica é acumulada ao longo dos estados da treliça, formando a chamada \textit{métrica de caminho}. Em cada novo passo da treliça, o algoritmo mantém apenas o caminho de menor métrica associado a cada estado, descartando caminhos menos prováveis.
+
+Ao final da travessia da treliça, é realizado o procedimento de \textit{traceback}, no qual o algoritmo percorre retroativamente os estados para recuperar a sequência mais provável de bits que foram transmitidos $\gls{utprime}$. A eficiência do algoritmo de Viterbi se deve justamente à eliminação de caminhos improváveis e ao uso da métrica cumulativa, é isso que permite a correção de erros dando ganho à comunicação.
+
+O desempenho do código pode ser medido dirtamente pela distância livre do código $\gls{dfree}$, desde que a quantidade de erros nas transições não passem da capacidade de correção do código, será possivel recuperar oque foi transmitido. Assim, o código convolucional do padrão CCSDS, com $\gls{dfree} = 10$, garante um ganho de desempenho significativo quando comparado a transmissão sem codificaçao, como é possível observar na \autoref{fig:curva_bersnr}.
 
 \begin{figure}[H]
 	\centering
