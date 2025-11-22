@@ -1,4 +1,4 @@
-# TCC - IFSC - Eng. Telecom TCC
+# Monografia - IFSC - Eng. Telecom TCC
 
 Este repositório é dedicado ao desenvolvimento do meu Trabalho de Conclusão de Curso (TCC) para o curso de Engenharia de Telecomunicações no Instituto Federal de Santa Catarina (IFSC).
 
